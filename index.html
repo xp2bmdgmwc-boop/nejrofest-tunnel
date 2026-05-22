@@ -18,7 +18,22 @@
     <!-- Matrix Pill Selection Portal -->
     <div id="matrix-portal" class="matrix-portal">
         <canvas id="matrix-rain-canvas"></canvas>
-        <div class="matrix-content">
+        
+        <!-- Step 1: Start Screen -->
+        <div id="matrix-start-screen" class="matrix-content start-screen-active" style="transition: opacity 0.5s ease;">
+            <div class="matrix-badge">Свето-акустический шлюз «Туннель Состояний»</div>
+            <h1 class="matrix-title" style="letter-spacing: 6px; font-size: clamp(24px, 4vw, 42px); margin-bottom: 50px;">СИМУЛЯЦИЯ ЗАПУЩЕНА</h1>
+            <div class="start-btn-container" style="margin-bottom: 40px;">
+                <button id="start-simulation-btn" class="pill-btn start-sim-btn">
+                    <div class="pulse-ring-red"></div>
+                    <span class="start-btn-text">НАЧАТЬ СИМУЛЯЦИЮ</span>
+                </button>
+            </div>
+            <div class="matrix-choice-hint" style="color: #64748b; font-size: 13px;">Интерактивный пространственный фильтр человека</div>
+        </div>
+
+        <!-- Step 2: Choice Screen (hidden initially) -->
+        <div id="matrix-choice-screen" class="matrix-content" style="display: none; opacity: 0; transition: opacity 0.8s ease;">
             <div class="matrix-badge">Свето-акустический шлюз «Туннель Состояний»</div>
             <h1 class="matrix-title">СДЕЛАЙ СВОЙ ВЫБОР</h1>
             <p class="matrix-subtitle">Нажмите на одну из пилюль, чтобы запустить симуляцию и войти на платформу</p>

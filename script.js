@@ -599,10 +599,32 @@ function exitIntroPortal() {
     }
 }
 
+document.getElementById('start-simulation-btn')?.addEventListener('click', () => {
+    const startScreen = document.getElementById('matrix-start-screen');
+    const choiceScreen = document.getElementById('matrix-choice-screen');
+    
+    if (startScreen && choiceScreen) {
+        startScreen.style.opacity = '0';
+        setTimeout(() => {
+            startScreen.style.display = 'none';
+            choiceScreen.style.display = 'flex';
+            // Trigger reflow to ensure the transition works
+            choiceScreen.offsetHeight;
+            choiceScreen.style.opacity = '1';
+            
+            // Activate the Matrix Rain canvas (fade it in)
+            if (matrixCanvas) {
+                matrixCanvas.style.opacity = '0.15';
+            }
+        }, 500);
+    }
+});
+
 document.getElementById('pill-red-btn')?.addEventListener('click', () => handlePillChoice('stress'));
 document.getElementById('pill-blue-btn')?.addEventListener('click', () => handlePillChoice('balance'));
 skipIntroBtn?.addEventListener('click', exitIntroPortal);
 introVideo?.addEventListener('ended', exitIntroPortal);
+
 
 
 // ==========================================================================

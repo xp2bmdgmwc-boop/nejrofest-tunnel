@@ -407,7 +407,9 @@ stateButtons.forEach(btn => {
         
         // Update Glow Backgrounds based on state
         const glow1 = document.getElementById('glow-1');
-        glow1.style.background = `radial-gradient(circle, ${state.color}1c 0%, rgba(6,6,10,0) 70%)`;
+        if (glow1) {
+            glow1.style.background = `radial-gradient(circle, ${state.color}1c 0%, rgba(6,6,10,0) 70%)`;
+        }
         
         // Sync Audio engine
         updateAudioFrequencies();
@@ -428,19 +430,548 @@ const modal = document.getElementById('qr-modal');
 const openModalBtn = document.getElementById('btn-download-souvenir');
 const closeModalElements = document.querySelectorAll('.close-modal, #btn-close-modal');
 
-openModalBtn.addEventListener('click', () => {
-    modal.classList.add('active');
-});
-
-closeModalElements.forEach(elem => {
-    elem.addEventListener('click', () => {
-        modal.classList.remove('active');
+if (openModalBtn && modal) {
+    openModalBtn.addEventListener('click', () => {
+        modal.classList.add('active');
     });
-});
 
-// Close modal when clicking outside content
-modal.addEventListener('click', (e) => {
-    if (e.target === modal) {
-        modal.classList.remove('active');
+    closeModalElements.forEach(elem => {
+        elem.addEventListener('click', () => {
+            modal.classList.remove('active');
+        });
+    });
+
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.classList.remove('active');
+        }
+    });
+}
+
+// ==========================================================================
+// 6. MATRIX PILL PORTAL & TRANSIT VIDEO SYSTEM
+// ==========================================================================
+
+const matrixCanvas = document.getElementById('matrix-rain-canvas');
+if (matrixCanvas) {
+    const mCtx = matrixCanvas.getContext('2d');
+    let mWidth = matrixCanvas.width = window.innerWidth;
+    let mHeight = matrixCanvas.height = window.innerHeight;
+    
+    window.addEventListener('resize', () => {
+        mWidth = matrixCanvas.width = window.innerWidth;
+        mHeight = matrixCanvas.height = window.innerHeight;
+        mColumns = Math.floor(mWidth / 20);
+        mDrops.length = 0;
+        for (let x = 0; x < mColumns; x++) mDrops[x] = 1;
+    });
+
+    const characters = '0101010101010101010101010101010101';
+    const mFontSize = 14;
+    let mColumns = Math.floor(mWidth / 20);
+    const mDrops = [];
+    for (let x = 0; x < mColumns; x++) {
+        mDrops[x] = Math.random() * -100; // Staggered start positions
     }
-});
+
+    let targetMatrixColor = { r: 16, g: 185, b: 129 }; // Default Matrix Green
+    let currentMatrixColor = { r: 16, g: 185, b: 129 };
+
+    function lerp(start, end, amt) {
+        return (1 - amt) * start + amt * end;
+    }
+
+    function drawMatrixRain() {
+        mCtx.fillStyle = 'rgba(2, 2, 4, 0.08)';
+        mCtx.fillRect(0, 0, mWidth, mHeight);
+
+        // Interpolate colors smoothly
+        currentMatrixColor.r = lerp(currentMatrixColor.r, targetMatrixColor.r, 0.08);
+        currentMatrixColor.g = lerp(currentMatrixColor.g, targetMatrixColor.g, 0.08);
+        currentMatrixColor.b = lerp(currentMatrixColor.b, targetMatrixColor.b, 0.08);
+        
+        mCtx.fillStyle = `rgb(${Math.round(currentMatrixColor.r)}, ${Math.round(currentMatrixColor.g)}, ${Math.round(currentMatrixColor.b)})`;
+        mCtx.font = mFontSize + 'px monospace';
+
+        for (let i = 0; i < mDrops.length; i++) {
+            const text = characters.charAt(Math.floor(Math.random() * characters.length));
+            mCtx.fillText(text, i * 20, mDrops[i] * mFontSize);
+
+            if (mDrops[i] * mFontSize > mHeight && Math.random() > 0.975) {
+                mDrops[i] = 0;
+            }
+            mDrops[i]++;
+        }
+        requestAnimationFrame(drawMatrixRain);
+    }
+    drawMatrixRain();
+
+    // Hover states for the pills to change the matrix rain color
+    const redBtn = document.getElementById('pill-red-btn');
+    const blueBtn = document.getElementById('pill-blue-btn');
+
+    if (redBtn && blueBtn) {
+        redBtn.addEventListener('mouseenter', () => {
+            targetMatrixColor = { r: 239, g: 68, b: 68 }; // Neon Red
+            matrixCanvas.style.opacity = '0.3';
+        });
+        redBtn.addEventListener('mouseleave', () => {
+            targetMatrixColor = { r: 16, g: 185, b: 129 }; // Restore Green
+            matrixCanvas.style.opacity = '0.15';
+        });
+
+        blueBtn.addEventListener('mouseenter', () => {
+            targetMatrixColor = { r: 14, g: 165, b: 233 }; // Neon Blue
+            matrixCanvas.style.opacity = '0.3';
+        });
+        blueBtn.addEventListener('mouseleave', () => {
+            targetMatrixColor = { r: 16, g: 185, b: 129 }; // Restore Green
+            matrixCanvas.style.opacity = '0.15';
+        });
+    }
+}
+
+// Choice Routing & Video Player
+const introVideoOverlay = document.getElementById('intro-video-overlay');
+const introVideo = document.getElementById('intro-video');
+const skipIntroBtn = document.getElementById('skip-intro-btn');
+let chosenStateKey = 'balance';
+
+function handlePillChoice(stateKey) {
+    chosenStateKey = stateKey;
+
+    // 1. Initialize audio context IMMEDIATELY on user click (gesture approval)
+    if (!audioCtx) {
+        initAudio();
+    } else if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+    }
+    
+    // Set simulator frequencies based on choice but keep muted during transit
+    updateAudioFrequencies();
+
+    // 2. Animate and fade out Matrix portal
+    const matrixPortal = document.getElementById('matrix-portal');
+    if (matrixPortal) {
+        matrixPortal.classList.add('fade-out');
+    }
+
+    // 3. Open Video Overlay and Play
+    if (introVideoOverlay) {
+        introVideoOverlay.classList.add('active');
+    }
+
+    if (introVideo) {
+        introVideo.play().catch(err => {
+            console.warn("Video play blocked, skipping transition", err);
+            exitIntroPortal();
+        });
+    }
+}
+
+function exitIntroPortal() {
+    if (introVideo) {
+        introVideo.pause();
+    }
+
+    // Fade out video overlay
+    if (introVideoOverlay) {
+        introVideoOverlay.classList.remove('active');
+        setTimeout(() => {
+            introVideoOverlay.style.display = 'none';
+            const portal = document.getElementById('matrix-portal');
+            if (portal) portal.style.display = 'none';
+        }, 800);
+    }
+
+    // Unlock page scroll
+    document.body.classList.remove('scroll-locked');
+
+    // Programmatically select state in simulator
+    const btn = document.querySelector(`.btn-state[data-state="${chosenStateKey}"]`);
+    if (btn) {
+        btn.click();
+    }
+
+    // Unmute and start audio playing immediately!
+    if (!isAudioPlaying) {
+        toggleAudio();
+    }
+}
+
+document.getElementById('pill-red-btn')?.addEventListener('click', () => handlePillChoice('stress'));
+document.getElementById('pill-blue-btn')?.addEventListener('click', () => handlePillChoice('balance'));
+skipIntroBtn?.addEventListener('click', exitIntroPortal);
+introVideo?.addEventListener('ended', exitIntroPortal);
+
+
+// ==========================================================================
+// 7. CITY SCALE: INTERACTIVE MAP CANVAS ENGINE (METRO & CITY NETWORKS)
+// ==========================================================================
+
+const cityCanvas = document.getElementById('city-network-canvas');
+if (cityCanvas) {
+    const cCtx = cityCanvas.getContext('2d');
+    let cWidth = cityCanvas.width = cityCanvas.parentElement.clientWidth;
+    let cHeight = cityCanvas.height = 320;
+
+    function resizeCityCanvas() {
+        if (cityCanvas.parentElement) {
+            cWidth = cityCanvas.width = cityCanvas.parentElement.clientWidth;
+            cHeight = cityCanvas.height = cityCanvas.parentElement.clientHeight || 320;
+        }
+    }
+    window.addEventListener('resize', resizeCityCanvas);
+    
+    // Generate Moskva River path coordinates snaking through canvas
+    const getRiverPath = () => {
+        const points = [];
+        const segments = 100;
+        for (let i = 0; i <= segments; i++) {
+            const t = i / segments;
+            const x = t * cWidth;
+            // Snaking river equation
+            const y = cHeight * 0.52 + Math.sin(t * Math.PI * 2.4) * (cHeight * 0.22) + Math.cos(t * Math.PI * 1.1) * (cHeight * 0.08);
+            points.push({ x, y });
+        }
+        return points;
+    };
+
+    // Metro Lines path coordinates
+    const getMetroLines = (centerX, centerY) => {
+        return [
+            {
+                name: 'Сокольническая (Красная)',
+                color: '#ef4444',
+                points: [
+                    { x: centerX - cWidth * 0.38, y: centerY + cHeight * 0.38 },
+                    { x: centerX - cWidth * 0.16, y: centerY + cHeight * 0.16 },
+                    { x: centerX, y: centerY },
+                    { x: centerX + cWidth * 0.16, y: centerY - cHeight * 0.16 },
+                    { x: centerX + cWidth * 0.38, y: centerY - cHeight * 0.38 }
+                ]
+            },
+            {
+                name: 'Замоскворецкая (Зеленая)',
+                color: '#10b981',
+                points: [
+                    { x: centerX - cWidth * 0.22, y: centerY - cHeight * 0.4 },
+                    { x: centerX - cWidth * 0.08, y: centerY - cHeight * 0.18 },
+                    { x: centerX, y: centerY },
+                    { x: centerX + cWidth * 0.06, y: centerY + cHeight * 0.2 },
+                    { x: centerX + cWidth * 0.12, y: centerY + cHeight * 0.4 }
+                ]
+            },
+            {
+                name: 'Кольцевая (Коричневая)',
+                color: '#8b5a2b',
+                isRing: true,
+                radiusX: cWidth * 0.14,
+                radiusY: cHeight * 0.28,
+                centerX: centerX,
+                centerY: centerY
+            },
+            {
+                name: 'Таганско-Краснопресненская (Фиолетовая)',
+                color: '#a855f7',
+                points: [
+                    { x: centerX - cWidth * 0.35, y: centerY - cHeight * 0.28 },
+                    { x: centerX - cWidth * 0.14, y: centerY - cHeight * 0.12 },
+                    { x: centerX + cWidth * 0.06, y: centerY + cHeight * 0.06 },
+                    { x: centerX + cWidth * 0.25, y: centerY + cHeight * 0.28 }
+                ]
+            }
+        ];
+    };
+
+    // City Nodes (Bridges, City towers, hubs)
+    const getHubNodes = (centerX, centerY) => {
+        return [
+            { id: 'ges2', name: 'ГЭС-2 / Патриарший мост', x: centerX + cWidth * 0.01, y: centerY + cHeight * 0.08, pulseSize: 8, isCore: true },
+            { id: 'city', name: 'Москва-Сити', x: centerX - cWidth * 0.26, y: centerY + cHeight * 0.02, pulseSize: 6, isCore: false },
+            { id: 'zaryadye', name: 'Зарядье / Парящий мост', x: centerX + cWidth * 0.13, y: centerY + cHeight * 0.04, pulseSize: 5, isCore: false },
+            { id: 'krymsky', name: 'Крымский мост / Парк Культуры', x: centerX - cWidth * 0.08, y: centerY + cHeight * 0.17, pulseSize: 5, isCore: false },
+            { id: 'belorusskaya', name: 'Белорусский узел', x: centerX - cWidth * 0.12, y: centerY - cHeight * 0.22, pulseSize: 4, isCore: false },
+            { id: 'taganskaya', name: 'Таганский узел', x: centerX + cWidth * 0.16, y: centerY + cHeight * 0.18, pulseSize: 4, isCore: false }
+        ];
+    };
+
+    // Signal Particle class
+    class SignalParticle {
+        constructor(path, color, speed, isRing = false, ringData = null) {
+            this.path = path;
+            this.color = color;
+            this.speed = speed;
+            this.isRing = isRing;
+            this.ringData = ringData;
+            this.size = Math.random() * 2 + 1.2;
+            
+            if (this.isRing) {
+                this.angle = Math.random() * Math.PI * 2;
+                this.x = ringData.centerX + Math.cos(this.angle) * ringData.radiusX;
+                this.y = ringData.centerY + Math.sin(this.angle) * ringData.radiusY;
+            } else {
+                this.progress = Math.random();
+                this.updatePosition();
+            }
+        }
+
+        updatePosition() {
+            if (this.isRing) {
+                this.angle += (this.speed * 0.012);
+                if (this.angle > Math.PI * 2) this.angle -= Math.PI * 2;
+                this.x = this.ringData.centerX + Math.cos(this.angle) * this.ringData.radiusX;
+                this.y = this.ringData.centerY + Math.sin(this.angle) * this.ringData.radiusY;
+            } else {
+                const totalPoints = this.path.length;
+                const segmentProgress = this.progress * (totalPoints - 1);
+                const startIndex = Math.floor(segmentProgress);
+                const endIndex = Math.min(startIndex + 1, totalPoints - 1);
+                const t = segmentProgress - startIndex;
+
+                const p1 = this.path[startIndex];
+                const p2 = this.path[endIndex];
+
+                if (p1 && p2) {
+                    this.x = p1.x + (p2.x - p1.x) * t;
+                    this.y = p1.y + (p2.y - p1.y) * t;
+                }
+
+                this.progress += this.speed * 0.0035;
+                if (this.progress >= 1) {
+                    this.progress = 0;
+                }
+            }
+        }
+
+        draw(ctx) {
+            ctx.fillStyle = this.color;
+            ctx.shadowColor = this.color;
+            ctx.shadowBlur = 5;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.shadowBlur = 0;
+        }
+    }
+
+    let mapParticles = [];
+    let mapPulseOffset = 0;
+    
+    function initMapParticles() {
+        mapParticles = [];
+        const centerX = cWidth / 2;
+        const centerY = cHeight / 2;
+        const metroLines = getMetroLines(centerX, centerY);
+        const riverPath = getRiverPath();
+
+        // Speed modifications depending on selected state
+        let speedMod = 1;
+        if (activeStateKey === 'stress') speedMod = 2.4;
+        else if (activeStateKey === 'apathy') speedMod = 0.4;
+        else if (activeStateKey === 'chaos') speedMod = 1.8;
+        else if (activeStateKey === 'balance') speedMod = 0.8;
+
+        // Metro line particles
+        metroLines.forEach(line => {
+            const count = line.isRing ? 10 : 6;
+            for (let i = 0; i < count; i++) {
+                if (line.isRing) {
+                    mapParticles.push(new SignalParticle(null, line.color, (Math.random() * 0.4 + 0.6) * speedMod, true, line));
+                } else {
+                    mapParticles.push(new SignalParticle(line.points, line.color, (Math.random() * 0.4 + 0.6) * speedMod));
+                }
+            }
+        });
+
+        // River particles
+        for (let i = 0; i < 12; i++) {
+            mapParticles.push(new SignalParticle(riverPath, '#38bdf8', (Math.random() * 0.3 + 0.7) * speedMod));
+        }
+
+        // Synaptic connections particles (GES-2 to others)
+        const hubs = getHubNodes(centerX, centerY);
+        const core = hubs[0];
+        hubs.forEach((hub, idx) => {
+            if (idx > 0) {
+                const synPath = [
+                    { x: core.x, y: core.y },
+                    { x: (core.x + hub.x) / 2 + (Math.random() - 0.5) * 20, y: (core.y + hub.y) / 2 + (Math.random() - 0.5) * 20 },
+                    { x: hub.x, y: hub.y }
+                ];
+                for (let i = 0; i < 3; i++) {
+                    mapParticles.push(new SignalParticle(synPath, STATES[activeStateKey].color, (Math.random() * 0.4 + 0.8) * speedMod));
+                }
+            }
+        });
+    }
+
+    let hoveredHub = null;
+    cityCanvas.addEventListener('mousemove', (e) => {
+        const rect = cityCanvas.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        const centerX = cWidth / 2;
+        const centerY = cHeight / 2;
+        const hubs = getHubNodes(centerX, centerY);
+        
+        hoveredHub = null;
+        for (const hub of hubs) {
+            const dist = Math.sqrt((hub.x - x)**2 + (hub.y - y)**2);
+            if (dist < 14) {
+                hoveredHub = hub;
+                break;
+            }
+        }
+    });
+
+    function drawCityMap() {
+        cCtx.fillStyle = 'rgba(2, 2, 4, 0.25)'; // trail effect
+        cCtx.fillRect(0, 0, cWidth, cHeight);
+
+        const centerX = cWidth / 2;
+        const centerY = cHeight / 2;
+        const stateColor = STATES[activeStateKey].color;
+
+        // 1. Draw Ring Roads
+        cCtx.strokeStyle = 'rgba(255, 255, 255, 0.02)';
+        cCtx.lineWidth = 1;
+        cCtx.beginPath();
+        cCtx.ellipse(centerX, centerY, cWidth * 0.42, cHeight * 0.42, 0, 0, Math.PI * 2);
+        cCtx.stroke();
+        
+        cCtx.strokeStyle = 'rgba(255, 255, 255, 0.04)';
+        cCtx.beginPath();
+        cCtx.ellipse(centerX, centerY, cWidth * 0.28, cHeight * 0.38, 0, 0, Math.PI * 2);
+        cCtx.stroke();
+
+        cCtx.strokeStyle = 'rgba(255, 255, 255, 0.07)';
+        cCtx.beginPath();
+        cCtx.ellipse(centerX, centerY, cWidth * 0.18, cHeight * 0.3, 0, 0, Math.PI * 2);
+        cCtx.stroke();
+
+        // 2. Draw Moskva River
+        const riverPath = getRiverPath();
+        cCtx.strokeStyle = 'rgba(14, 165, 233, 0.12)';
+        cCtx.lineWidth = 8;
+        cCtx.lineCap = 'round';
+        cCtx.beginPath();
+        riverPath.forEach((p, idx) => {
+            if (idx === 0) cCtx.moveTo(p.x, p.y);
+            else cCtx.lineTo(p.x, p.y);
+        });
+        cCtx.stroke();
+
+        cCtx.strokeStyle = 'rgba(14, 165, 233, 0.25)';
+        cCtx.lineWidth = 3;
+        cCtx.stroke();
+
+        // 3. Draw Metro Lines
+        const metroLines = getMetroLines(centerX, centerY);
+        metroLines.forEach(line => {
+            cCtx.strokeStyle = line.color + '20';
+            cCtx.lineWidth = 4;
+            cCtx.beginPath();
+            
+            if (line.isRing) {
+                cCtx.ellipse(line.centerX, line.centerY, line.radiusX, line.radiusY, 0, 0, Math.PI * 2);
+            } else {
+                line.points.forEach((p, idx) => {
+                    if (idx === 0) cCtx.moveTo(p.x, p.y);
+                    else cCtx.lineTo(p.x, p.y);
+                });
+            }
+            cCtx.stroke();
+
+            cCtx.strokeStyle = line.color + '40';
+            cCtx.lineWidth = 1.5;
+            cCtx.stroke();
+        });
+
+        // 4. Draw Synapses
+        const hubs = getHubNodes(centerX, centerY);
+        const core = hubs[0];
+        hubs.forEach((hub, idx) => {
+            if (idx > 0) {
+                cCtx.strokeStyle = stateColor + '10';
+                cCtx.lineWidth = 1;
+                cCtx.beginPath();
+                cCtx.moveTo(core.x, core.y);
+                cCtx.bezierCurveTo(
+                    (core.x + hub.x) / 2, core.y - 15,
+                    (core.x + hub.x) / 2, hub.y + 15,
+                    hub.x, hub.y
+                );
+                cCtx.stroke();
+            }
+        });
+
+        // 5. Draw Particles
+        mapParticles.forEach(p => {
+            p.updatePosition();
+            p.draw(cCtx);
+        });
+
+        // 6. Draw Hub Nodes
+        hubs.forEach(hub => {
+            const isHovered = hoveredHub && hoveredHub.id === hub.id;
+            const glowMul = isHovered ? 2.2 : 1.0;
+            
+            cCtx.fillStyle = hub.isCore ? '#d4af37' : stateColor;
+            cCtx.shadowColor = hub.isCore ? '#d4af37' : stateColor;
+            cCtx.shadowBlur = (9 + Math.sin(mapPulseOffset) * 4) * glowMul;
+
+            cCtx.beginPath();
+            const r = (hub.pulseSize + Math.sin(mapPulseOffset * (hub.isCore ? 1.4 : 1.0)) * 1.2) * (isHovered ? 1.3 : 1.0);
+            cCtx.arc(hub.x, hub.y, r, 0, Math.PI * 2);
+            cCtx.fill();
+            cCtx.shadowBlur = 0;
+
+            cCtx.strokeStyle = hub.isCore ? 'rgba(212, 175, 55, 0.4)' : (stateColor + '55');
+            cCtx.lineWidth = 1;
+            cCtx.beginPath();
+            cCtx.arc(hub.x, hub.y, r * (1.5 + Math.sin(mapPulseOffset * 1.1) * 0.3), 0, Math.PI * 2);
+            cCtx.stroke();
+
+            // Label
+            cCtx.fillStyle = '#ffffff';
+            cCtx.font = (isHovered ? 'bold 10px' : '8.5px') + ' "Outfit", sans-serif';
+            cCtx.textAlign = 'center';
+            cCtx.fillText(hub.name, hub.x, hub.y - r - 8);
+            
+            if (isHovered) {
+                cCtx.fillStyle = '#94a3b8';
+                cCtx.font = '8.5px monospace';
+                let statusText = 'СИНХРОНИЗАЦИЯ: 100%';
+                if (activeStateKey === 'stress') statusText = 'ШУМ: ВЫСОКИЙ (СБРОС)';
+                else if (activeStateKey === 'apathy') statusText = 'ТОНУС: НИЗКИЙ (АКТИВАЦИЯ)';
+                else if (activeStateKey === 'chaos') statusText = 'ШУМ: 91% (БАЛАНСИРОВКА)';
+                else if (activeStateKey === 'balance') statusText = 'СОСТОЯНИЕ: ИДЕАЛЬНОЕ';
+                cCtx.fillText(statusText, hub.x, hub.y + r + 13);
+            }
+        });
+
+        let pulseSpeed = 0.035;
+        if (activeStateKey === 'stress') pulseSpeed = 0.07;
+        else if (activeStateKey === 'apathy') pulseSpeed = 0.012;
+        else if (activeStateKey === 'chaos') pulseSpeed = 0.055;
+        else if (activeStateKey === 'balance') pulseSpeed = 0.03;
+
+        mapPulseOffset += pulseSpeed;
+
+        requestAnimationFrame(drawCityMap);
+    }
+
+    resizeCityCanvas();
+    initMapParticles();
+    drawCityMap();
+    
+    // Sync speed/colors immediately when simulator buttons are clicked
+    stateButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            setTimeout(initMapParticles, 40);
+        });
+    });
+}
+

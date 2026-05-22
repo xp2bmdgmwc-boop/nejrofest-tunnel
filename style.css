@@ -1405,23 +1405,54 @@ a {
     overflow: hidden;
 }
 
-.network-grid {
+.network-tabs-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
     margin-top: 50px;
-    gap: 50px;
+}
+
+.network-card-main {
+    background: rgba(13, 13, 20, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.network-card-main:hover {
+    transform: translateY(-6px);
+    border-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+}
+
+.network-card-main.highlight-card {
+    border-color: rgba(212, 175, 55, 0.25);
+    background: rgba(20, 16, 10, 0.3);
+    box-shadow: 0 0 35px rgba(212, 175, 55, 0.03);
+}
+
+.network-card-main.highlight-card:hover {
+    border-color: rgba(212, 175, 55, 0.5);
+    box-shadow: 0 15px 45px rgba(212, 175, 55, 0.15);
 }
 
 .network-image-wrapper {
     position: relative;
-    border-radius: var(--border-radius-lg);
+    height: 320px;
     overflow: hidden;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    background-color: var(--bg-card);
+    background-color: #030306;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .network-img {
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
     display: block;
     transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
@@ -1430,75 +1461,420 @@ a {
     transform: scale(1.05);
 }
 
+.interactive-map-wrapper {
+    background: radial-gradient(circle at 50% 50%, #06060c 0%, #020204 100%);
+    cursor: crosshair;
+}
+
+#city-network-canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
 .network-glow {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle at 30% 70%, rgba(14, 165, 233, 0.15) 0%, transparent 60%);
+    background: radial-gradient(circle at 50% 50%, rgba(14, 165, 233, 0.1) 0%, transparent 70%);
     pointer-events: none;
 }
 
-.network-info h3 {
-    font-family: var(--font-primary);
-    font-size: 24px;
+.network-badge-overlay {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 8px 16px;
+    background: rgba(2, 2, 4, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    font-size: 11px;
     font-weight: 600;
-    margin-bottom: 20px;
+    letter-spacing: 1.5px;
     color: var(--text-light);
+    text-transform: uppercase;
+    z-index: 10;
+    pointer-events: none;
 }
 
-.network-list {
-    list-style: none;
-    padding: 0;
-    margin: 25px 0;
+.network-badge-overlay.special {
+    border-color: rgba(212, 175, 55, 0.4);
+    color: #d4af37;
+    background: rgba(18, 12, 4, 0.9);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.15);
+}
+
+.network-card-content {
+    padding: 30px;
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
-    gap: 20px;
 }
 
-.network-list li {
-    display: flex;
-    gap: 15px;
-    align-items: flex-start;
-}
-
-.network-list i {
-    font-size: 20px;
-    color: #a78bfa;
-    margin-top: 3px;
-    flex-shrink: 0;
-}
-
-.network-list strong {
-    display: block;
+.network-card-content h3 {
+    font-family: var(--font-primary);
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 15px;
     color: var(--text-light);
-    font-size: 16px;
-    margin-bottom: 4px;
 }
 
-.network-list div {
+.network-card-content p {
     font-size: 15px;
     line-height: 1.6;
     color: var(--text-muted);
+    margin-bottom: 25px;
+}
+
+.concept-features {
+    list-style: none;
+    padding: 0;
+    margin: auto 0 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.concept-features li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+.concept-features i {
+    font-size: 16px;
+    color: #a78bfa;
+    width: 20px;
+    text-align: center;
+}
+
+.highlight-card .concept-features i {
+    color: #d4af37;
 }
 
 .network-quote {
     border-left: 3px solid #d4af37;
     padding-left: 20px;
-    margin-top: 35px;
+    margin-top: 50px;
     font-style: italic;
 }
 
 .network-quote i {
     font-size: 24px;
-    color: rgba(212, 175, 55, 0.3);
+    color: rgba(212, 175, 55, 0.25);
     margin-bottom: 10px;
     display: block;
 }
 
 .network-quote p {
     font-size: 16px;
-    line-height: 1.6;
+    line-height: 1.7;
     color: var(--text-secondary);
+}
+
+/* Scroll Lock State */
+.scroll-locked {
+    overflow: hidden !important;
+    height: 100vh !important;
+    width: 100vw !important;
+    position: fixed !important;
+}
+
+/* ==========================================================================
+   Matrix Pill Choice Portal
+   ========================================================================== */
+.matrix-portal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #020204;
+    z-index: 99999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    transition: opacity 1s cubic-bezier(0.165, 0.84, 0.44, 1), visibility 1s;
+}
+
+.matrix-portal.fade-out {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+#matrix-rain-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: 0.15;
+    transition: opacity 0.5s;
+}
+
+.matrix-content {
+    position: relative;
+    z-index: 10;
+    max-width: 850px;
+    padding: 40px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.matrix-badge {
+    font-family: var(--font-primary);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    color: #d4af37;
+    text-transform: uppercase;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    padding: 6px 16px;
+    border-radius: 20px;
+    background: rgba(212, 175, 55, 0.05);
+    margin-bottom: 25px;
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.1);
+}
+
+.matrix-title {
+    font-family: var(--font-primary);
+    font-size: clamp(32px, 5vw, 56px);
+    font-weight: 800;
+    letter-spacing: 8px;
+    color: #ffffff;
+    margin-bottom: 15px;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+.matrix-subtitle {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #94a3b8;
+    max-width: 600px;
+    margin-bottom: 50px;
+}
+
+.pills-container {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+.pill-btn {
+    background: rgba(13, 13, 20, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
+    padding: 35px 30px;
+    width: 290px;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+}
+
+.pill-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 23px;
+    background: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.05), transparent 70%);
+    pointer-events: none;
+}
+
+/* Hover & Active Pill Effects */
+.pill-btn:hover {
+    transform: translateY(-8px) scale(1.03);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.pill-red:hover {
+    box-shadow: 0 15px 40px rgba(239, 68, 68, 0.25), 0 0 0 1px rgba(239, 68, 68, 0.3);
+    background: rgba(30, 10, 10, 0.5);
+}
+
+.pill-blue:hover {
+    box-shadow: 0 15px 40px rgba(14, 165, 233, 0.25), 0 0 0 1px rgba(14, 165, 233, 0.3);
+    background: rgba(10, 20, 35, 0.5);
+}
+
+/* The Pill Shape */
+.pill-visual {
+    width: 90px;
+    height: 38px;
+    border-radius: 19px;
+    position: relative;
+    margin-bottom: 25px;
+    box-shadow: inset 0 2px 4px rgba(255,255,255,0.3), 0 10px 25px rgba(0,0,0,0.5);
+    animation: floatPill 4s ease-in-out infinite;
+}
+
+.pill-red .pill-visual {
+    background: linear-gradient(to right, #ef4444 50%, #991b1b 50%);
+    filter: drop-shadow(0 0 8px rgba(239, 68, 68, 0.6));
+    animation-delay: 0s;
+}
+
+.pill-blue .pill-visual {
+    background: linear-gradient(to right, #0ea5e9 50%, #1e40af 50%);
+    filter: drop-shadow(0 0 8px rgba(14, 165, 233, 0.6));
+    animation-delay: 2s; /* Desynchronize float animation */
+}
+
+/* Levitation keyframes */
+@keyframes floatPill {
+    0% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-8px) rotate(3deg);
+    }
+    100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+}
+
+.pill-label {
+    font-family: var(--font-primary);
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: #ffffff;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    transition: text-shadow 0.3s;
+}
+
+.pill-red:hover .pill-label {
+    text-shadow: 0 0 10px rgba(239, 68, 68, 0.6);
+}
+
+.pill-blue:hover .pill-label {
+    text-shadow: 0 0 10px rgba(14, 165, 233, 0.6);
+}
+
+.pill-desc {
+    font-size: 13px;
+    color: #64748b;
+    text-align: center;
+    line-height: 1.4;
+    transition: color 0.3s;
+}
+
+.pill-btn:hover .pill-desc {
+    color: #94a3b8;
+}
+
+.matrix-choice-hint {
+    font-size: 12px;
+    color: #475569;
+    letter-spacing: 0.5px;
+}
+
+/* ==========================================================================
+   Transit Video Overlay
+   ========================================================================== */
+.intro-video-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #000000;
+    z-index: 99998;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.8s cubic-bezier(0.165, 0.84, 0.44, 1), visibility 0.8s;
+}
+
+.intro-video-overlay.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+}
+
+.intro-video-overlay video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.skip-intro-btn {
+    position: absolute;
+    bottom: 40px;
+    right: 40px;
+    background: rgba(2, 2, 4, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 30px;
+    padding: 14px 28px;
+    color: #ffffff;
+    font-family: var(--font-primary);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 100;
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    backdrop-filter: blur(10px);
+}
+
+.skip-intro-btn:hover {
+    background: #ffffff;
+    color: #020204;
+    border-color: #ffffff;
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
+    transform: scale(1.05);
+}
+
+/* Responsive fixes for network & matrix */
+@media (max-width: 768px) {
+    .network-tabs-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .pills-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+    
+    .pill-btn {
+        width: 100%;
+        max-width: 320px;
+        padding: 25px 20px;
+    }
+    
+    .matrix-content {
+        padding: 20px;
+    }
+    
+    .skip-intro-btn {
+        bottom: 20px;
+        right: 20px;
+        padding: 10px 20px;
+        font-size: 11px;
+    }
 }

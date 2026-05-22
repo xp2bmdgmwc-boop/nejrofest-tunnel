@@ -13,7 +13,44 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="scroll-locked">
+
+    <!-- Matrix Pill Selection Portal -->
+    <div id="matrix-portal" class="matrix-portal">
+        <canvas id="matrix-rain-canvas"></canvas>
+        <div class="matrix-content">
+            <div class="matrix-badge">Свето-акустический шлюз «Туннель Состояний»</div>
+            <h1 class="matrix-title">СДЕЛАЙ СВОЙ ВЫБОР</h1>
+            <p class="matrix-subtitle">Нажмите на одну из пилюль, чтобы запустить симуляцию и войти на платформу</p>
+            
+            <div class="pills-container">
+                <button class="pill-btn pill-red" id="pill-red-btn" data-state="stress">
+                    <div class="pill-visual"></div>
+                    <span class="pill-label">КРАСНАЯ ТАБЛЕТКА</span>
+                    <span class="pill-desc">Принять реальность (Шум / Стресс)</span>
+                </button>
+                
+                <button class="pill-btn pill-blue" id="pill-blue-btn" data-state="balance">
+                    <div class="pill-visual"></div>
+                    <span class="pill-label">СИНЯЯ ТАБЛЕТКА</span>
+                    <span class="pill-desc">Погрузиться в иллюзию (Покой / Баланс)</span>
+                </button>
+            </div>
+            
+            <div class="matrix-choice-hint">Ваш выбор определит начальную частоту и цвет пространства при входе</div>
+        </div>
+    </div>
+
+    <!-- Fullscreen Transit Video -->
+    <div id="intro-video-overlay" class="intro-video-overlay">
+        <video id="intro-video" muted playsinline preload="metadata">
+            <source src="images/walkthrough.mp4" type="video/mp4">
+        </video>
+        <button id="skip-intro-btn" class="skip-intro-btn">
+            <span>Пропустить интро</span>
+            <i class="fa-solid fa-arrow-right"></i>
+        </button>
+    </div>
 
     <!-- Background Ambient Glows -->
     <div class="ambient-glow" id="glow-1"></div>
@@ -457,46 +494,52 @@
     </section>
 
     <!-- City Scale: Neural Network of Bridges -->
+    <!-- City Scale: Neural Network of Bridges & Moscow City -->
     <section id="city-network" class="section city-network-section">
         <div class="container">
-            <h2 class="section-title text-center">Визионерский масштаб: Нейросеть Мостов Москвы</h2>
-            <p class="lead text-center max-w-3xl">Концепция масштабирования: превращение пешеходных и автомобильных мостов в центре столицы в единую свето-акустическую нейросеть, отражающую ритмы мегаполиса.</p>
+            <h2 class="section-title text-center">Визионерский масштаб: Нейросеть Мегаполиса</h2>
+            <p class="lead text-center max-w-3xl">Концепция масштабирования: интеграция свето-акустических шлюзов в масштабе всей Москвы. От точечных мостов до глобальной сети небоскребов Москва-Сити и линий метрополитена.</p>
             
-            <div class="grid grid-2 align-center network-grid">
-                <div class="network-image-wrapper">
-                    <img src="images/moscow_bridges.png" alt="Световая нейросеть мостов Москвы" class="network-img">
-                    <div class="network-glow"></div>
-                </div>
-                <div class="network-info">
-                    <h3>Единый пульс города</h3>
-                    <p>Каждый крупный мост в историческом центре Москвы (Патриарший, Крымский, Большой Каменный, Парящий мост в Зарядье) получает свою уникальную пространственную концепцию и световую сигнатуру:</p>
-                    
-                    <ul class="network-list">
-                        <li>
-                            <i class="fa-solid fa-circle-nodes"></i>
-                            <div>
-                                <strong>Синхронизация через реку:</strong> Мосты связываются в единую беспроводную сеть. Когда человек проходит по одному мосту, его гармонизированное состояние передает световой импульс вдоль реки к следующим мостам.
-                            </div>
-                        </li>
-                        <li>
-                            <i class="fa-solid fa-chart-line"></i>
-                            <div>
-                                <strong>Интерактивный барометр мегаполиса:</strong> Суммарная статистика эмоционального фонда жителей визуализируется в виде мягких переливов цвета, отражающихся от водного зеркала. Москва буквально начинает «дышать» в такт с её жителями.
-                            </div>
-                        </li>
-                        <li>
-                            <i class="fa-solid fa-map-location-dot"></i>
-                            <div>
-                                <strong>Тематические зоны:</strong> Крымский мост настраивает на глубокий покой, Патриарший мост у Храма Христа Спасителя — на медитацию и духовный баланс, а Парящий мост в Зарядье становится точкой яркого творческого фокуса.
-                            </div>
-                        </li>
-                    </ul>
-                    
-                    <div class="network-quote">
-                        <i class="fa-solid fa-quote-left"></i>
-                        <p>«Река становится главной артерией не только логистики, но и психоэмоционального здоровья города, объединяя жителей через свет и звук»</p>
+            <div class="network-tabs-grid">
+                <!-- Concept 1: Bridges Network -->
+                <div class="network-card-main">
+                    <div class="network-image-wrapper">
+                        <img src="images/moscow_bridges.png" alt="Световая нейросеть мостов Москвы" class="network-img">
+                        <div class="network-glow"></div>
+                        <div class="network-badge-overlay">Масштаб 1: Река & Мосты</div>
+                    </div>
+                    <div class="network-card-content">
+                        <h3>1. Единый пульс реки</h3>
+                        <p>Связь ключевых пешеходных и автомобильных переходов центра столицы в единый живой контур. Световые волны транслируются вдоль воды, отражая динамику движения и эмоциональный фон жителей в реальном времени.</p>
+                        <ul class="concept-features">
+                            <li><i class="fa-solid fa-circle-nodes"></i> Синхронизация мостов по радиоканалу</li>
+                            <li><i class="fa-solid fa-water"></i> Световые отражения на водном зеркале</li>
+                            <li><i class="fa-solid fa-wind"></i> Гашение акустического шума набережных</li>
+                        </ul>
                     </div>
                 </div>
+
+                <!-- Concept 2: Moscow City & Metro -->
+                <div class="network-card-main highlight-card">
+                    <div class="network-image-wrapper interactive-map-wrapper">
+                        <canvas id="city-network-canvas"></canvas>
+                        <div class="network-badge-overlay special">Интерактивный Живой Масштаб: Сити & Метро</div>
+                    </div>
+                    <div class="network-card-content">
+                        <h3>2. Пульсирующая сеть: Сити & Метро</h3>
+                        <p>Глобальный супер-вижн: интеграция датчиков метрополитена и медиа-фасадов небоскребов Москва-Сити. С высоты полета или из космоса город выглядит как единый гигантский синаптический узел, пульсирующий в такт дыханию миллионов людей.</p>
+                        <ul class="concept-features">
+                            <li><i class="fa-solid fa-tower-observation"></i> Синхронизация фасадов небоскребов Сити</li>
+                            <li><i class="fa-solid fa-train-subway"></i> Интеграция с трафиком линий метро</li>
+                            <li><i class="fa-solid fa-satellite"></i> Визуальный паттерн, заметный из космоса</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="network-quote max-w-3xl text-center margin-top-lg">
+                <i class="fa-solid fa-quote-left"></i>
+                <p>«Мегаполис превращается из источника стресса в саморегулирующийся терапевтический организм. Свет и звук объединяют миллионы жителей в один гармоничный ритм, видимый на масштабах всей планеты»</p>
             </div>
         </div>
     </section>

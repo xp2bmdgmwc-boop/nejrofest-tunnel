@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Туннель Состояний | Адаптивная свето-акустическая инсталляция</title>
+    <meta name="description" content="Интерактивный пространственный фильтр для учреждений культуры от Валерия Латыпова и Алёны Левицкой. Проект Нейрофест 2026.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Background Ambient Glows -->
+    <div class="ambient-glow" id="glow-1"></div>
+    <div class="ambient-glow" id="glow-2"></div>
+
+    <!-- Navigation -->
+    <header class="header">
+        <div class="logo">
+            <span class="logo-main">THE STATE TUNNEL</span>
+            <span class="logo-sub">ТУННЕЛЬ СОСТОЯНИЙ</span>
+        </div>
+        <nav class="nav">
+            <a href="#concept">Концепция</a>
+            <a href="#simulator">Симулятор</a>
+            <a href="#gallery">Галерея</a>
+            <a href="#team">Авторы</a>
+            <a href="#tech">ТЗ</a>
+        </nav>
+        <div class="cta-header">
+            <a href="#simulator" class="btn btn-outline">Начать сессию</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="badge">Проект для акселератора #Нейрофест2026</div>
+            <h1 class="hero-title">Пространственный фильтр человека</h1>
+            <p class="hero-subtitle">Архитектурный свето-акустический шлюз, трансформирующий психоэмоциональное состояние через физическое пространство, квантовую оптику и биометрию.</p>
+            <div class="hero-actions">
+                <a href="#simulator" class="btn btn-primary">Запустить симулятор</a>
+                <a href="#concept" class="btn btn-secondary">Подробнее о проекте</a>
+            </div>
+        </div>
+        <div class="hero-bg-visual">
+            <div class="tunnel-mesh"></div>
+        </div>
+        <div class="scroll-indicator">
+            <span>Листайте вниз</span>
+            <i class="fa-solid fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- Philosophy / Concept Section -->
+    <section id="concept" class="section concept-section">
+        <div class="container">
+            <div class="grid grid-2">
+                <div class="concept-text">
+                    <h2 class="section-title">Философия</h2>
+                    <p class="quote">«Не беги. Скоро всё закончится»</p>
+                    <p class="lead">Современный человек живет в состоянии постоянного информационного шума. Приходя в музей, театр или библиотеку, он приносит этот шум с собой. Его внимание рассеяно, его мозг перегружен.</p>
+                    <p><strong>«Туннель Состояний»</strong> — это физический шлюз между суетой города и тишиной искусства. Объединяя архитектуру Алёны Левицкой (бюро «СТРУКТУРА») и визуально-физическую практику Валерия Латыпова, мы создали адаптивный фильтр.</p>
+                    <p>Туннель считывает биометрию входящего человека и перестраивает световые волны, генеративную графику и акустические частоты в реальном времени, погружая его в расслабляющий кокон и бережно выводя к чистому свету и гармонии.</p>
+                </div>
+                <div class="concept-visual">
+                    <div class="img-wrapper">
+                        <img src="images/entrance.jpg" alt="Вход в туннель состояний">
+                        <div class="img-caption">Входной портал и стойка сканирования состояния</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Simulator Section -->
+    <section id="simulator" class="section simulator-section">
+        <div class="container">
+            <div class="text-center max-w-3xl">
+                <h2 class="section-title">Интерактивный симулятор</h2>
+                <p class="lead">Почувствуйте, как работает пространство. Выберите ваше текущее состояние ниже и включите звук, чтобы прослушать гармонизирующую частоту.</p>
+            </div>
+
+            <div class="simulator-container">
+                <!-- Visual Canvas Screen -->
+                <div class="sim-screen" id="sim-screen">
+                    <canvas id="visual-canvas"></canvas>
+                    <div class="screen-overlay">
+                        <div class="state-indicator">
+                            <span class="label">Текущее состояние:</span>
+                            <span class="value" id="current-state-val">Стресс / Суета</span>
+                        </div>
+                        <div class="frequency-indicator">
+                            <i class="fa-solid fa-wave-square"></i>
+                            <span id="frequency-val">Тета-частота (100Гц / 106Гц)</span>
+                        </div>
+                    </div>
+                    <!-- Audio Control Overlay -->
+                    <button class="audio-toggle" id="audio-toggle" title="Включить/выключить звук">
+                        <i class="fa-solid fa-volume-xmark"></i>
+                        <span>Включить звук (Частота баланса)</span>
+                    </button>
+                </div>
+
+                <!-- Controls & Artifact Output -->
+                <div class="sim-sidebar">
+                    <div class="sim-card">
+                        <h3>1. Сделайте замер</h3>
+                        <p class="card-desc">Выберите доминирующее состояние для симуляции датчиков входа:</p>
+                        <div class="state-buttons">
+                            <button class="btn-state active" data-state="stress" data-color="#1e3a8a" data-freq-diff="6">
+                                <i class="fa-solid fa-bolt"></i> Стресс / Тревога
+                            </button>
+                            <button class="btn-state" data-state="apathy" data-color="#b45309" data-freq-diff="12">
+                                <i class="fa-solid fa-battery-empty"></i> Усталость / Апатия
+                            </button>
+                            <button class="btn-state" data-state="chaos" data-color="#6b21a8" data-freq-diff="8">
+                                <i class="fa-solid fa-wind"></i> Ментальный Хаос
+                            </button>
+                            <button class="btn-state" data-state="balance" data-color="#ffffff" data-freq-diff="0">
+                                <i class="fa-solid fa-circle-check"></i> Баланс / Покой
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="sim-card card-souvenir">
+                        <h3>2. Ваш цифровой сувенир</h3>
+                        <p class="card-desc">Генерация личной видеооткрытки и карты ритмов на выходе:</p>
+                        <div class="souvenir-preview">
+                            <div class="souvenir-mock" id="souvenir-visual">
+                                <div class="pulse-ring"></div>
+                                <canvas id="chart-canvas" width="200" height="80"></canvas>
+                            </div>
+                            <div class="souvenir-info">
+                                <span class="badge-mini">Уникальный ID: ST-2026-992</span>
+                                <h4>Карта перехода</h4>
+                                <p id="souvenir-desc">Гармонизация тета-волнами (6 Гц разница). Нейродинамический баланс восстановлен на 94%.</p>
+                                <button class="btn btn-primary btn-sm" id="btn-download-souvenir">
+                                    <i class="fa-solid fa-qrcode"></i> Получить QR-код
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- User Journey -->
+    <section class="section journey-section">
+        <div class="container">
+            <h2 class="section-title text-center">Путь человека в туннеле</h2>
+            <div class="journey-steps">
+                <div class="step-card">
+                    <div class="step-num">01</div>
+                    <h3>Вход и сканирование</h3>
+                    <p>Биометрические сенсоры и бесконтактное считывание пульса определяют доминантную частоту вашего состояния.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">02</div>
+                    <h3>Свето-акустический кокон</h3>
+                    <p>Стены, пол и потолок генерируют световые волны и акустический фон, компенсирующие разбаланс систем тела.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">03</div>
+                    <h3>Белое очищение</h3>
+                    <p>В конце коридора все паттерны переходят в чистый белый свет, перезагружая визуальное восприятие.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">04</div>
+                    <h3>Цифровой отпечаток</h3>
+                    <p>Вы получаете видеозапись вашего уникального светового пути и карту состояний прямо на смартфон.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="section gallery-section">
+        <div class="container">
+            <h2 class="section-title text-center">Визуальные материалы</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item large">
+                    <img src="images/entrance.jpg" alt="Вход в инсталляцию">
+                    <div class="item-overlay">
+                        <h3>Входной портал</h3>
+                        <p>Интерьерное решение входной зоны с датчиками считывания полей.</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/variations.jpg" alt="Варианты интерьеров туннелей">
+                    <div class="item-overlay">
+                        <h3>Типы пространственной геометрии</h3>
+                        <p>Сетка, биоморфные формы и полигональные секции.</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/pov_states.jpg" alt="Вид от первого лица по состояниям">
+                    <div class="item-overlay">
+                        <h3>Световые фильтры</h3>
+                        <p>Глубокий синий (стресс), золотой (апатия) и чистый белый (катарсис).</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/side_view.png" alt="Чертеж в разрезе">
+                    <div class="item-overlay">
+                        <h3>Продольный разрез</h3>
+                        <p>Конструктивное решение и распространение светового шлейфа за человеком.</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/pov_inside.png" alt="Интерьер туннеля">
+                    <div class="item-overlay">
+                        <h3>Световой кокон</h3>
+                        <p>Бесшовное покрытие LED-панелями высокого разрешения.</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/blueprint.png" alt="Схема сверху">
+                    <div class="item-overlay">
+                        <h3>Архитектурная схема</h3>
+                        <p>Зонирование от сканирования до зала света на выходе.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team / Philosophy Section -->
+    <section id="team" class="section team-section">
+        <div class="container">
+            <h2 class="section-title text-center">Авторы проекта</h2>
+            <div class="grid grid-2">
+                <!-- Valery -->
+                <div class="author-card">
+                    <div class="author-header">
+                        <h3>Валерий Латыпов</h3>
+                        <span class="author-title">Визуальный художник & Физик (НИЯУ МИФИ)</span>
+                    </div>
+                    <p class="author-bio">Инженер-физик по образованию (квантовая радиофизика МИФИ), Валерий более 20 лет работает на стыке науки, музыки и визуального искусства. Спикер TEDx, автор персональных выставок, официальный фотограф Dubai Opera и фестивалей WOMAD Питера Гэбриэла. В проекте отвечает за визуальную физику света, звуковые ритмы и математическое моделирование балансирующих состояний.</p>
+                    <div class="author-links">
+                        <a href="http://www.valerylatypov.com" target="_blank"><i class="fa-solid fa-globe"></i> valerylatypov.com</a>
+                    </div>
+                </div>
+                <!-- Alena -->
+                <div class="author-card">
+                    <div class="author-header">
+                        <h3>Алёна Левицкая</h3>
+                        <span class="author-title">Основатель архитектурного бюро «СТРУКТУРА»</span>
+                    </div>
+                    <p class="author-bio">Член Союза архитекторов Москвы с 2009 года. Её бюро с 2015 года проектирует сложные жилые, социальные и культурные объекты. Алёна специализируется на «оживлении» и переосмыслении мертвых пространств в городе, имеет лицензию Минкультуры РФ на работу с историческим наследием, проектировала творческую резиденцию «АртМастерс». В проекте отвечает за конструктив, зонирование и пространственную адаптацию.</p>
+                    <div class="author-links">
+                        <a href="https://thestructure.ru" target="_blank"><i class="fa-solid fa-globe"></i> thestructure.ru</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical & Specifications Section -->
+    <section id="tech" class="section tech-section">
+        <div class="container">
+            <h2 class="section-title text-center">Техническое воплощение (ТЗ)</h2>
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <div class="tech-icon"><i class="fa-solid fa-hard-drive"></i></div>
+                    <h3>Аппаратная часть (Hardware)</h3>
+                    <ul>
+                        <li><strong>Конструктив:</strong> Модульный каркас из облегченного сплава (быстрая сборка).</li>
+                        <li><strong>Экраны:</strong> Бесшовные гибкие LED-панели (шаг 1.8 - 2.5 мм) на стенах, потолке и полу.</li>
+                        <li><strong>Сенсоры:</strong> Лидар для трекинга человека, ИК-камера для бесконтактного считывания пульса, датчик выражений лица.</li>
+                        <li><strong>Акустика:</strong> Массив направленного звука (Audio Spotlight) для изоляции аудио-поля.</li>
+                    </ul>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon"><i class="fa-solid fa-code"></i></div>
+                    <h3>Программная часть (Software)</h3>
+                    <ul>
+                        <li><strong>Нейроанализ:</strong> Определение психоэмоционального индекса в реальном времени.</li>
+                        <li><strong>Генеративный движок:</strong> Свето-динамический рендер на TouchDesigner / Unreal Engine.</li>
+                        <li><strong>Бинауральный синтез:</strong> Генерация звуковых компенсирующих частот на лету.</li>
+                        <li><strong>Экспорт:</strong> Модуль автоматического рендера 15-секундного видеоотчета и выгрузка в облако для QR-кода.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 Проект «Туннель Состояний». Разработано специально для национального акселератора #Нейрофест2026.</p>
+                <div class="footer-links">
+                    <a href="#concept">О проекте</a>
+                    <a href="#simulator">Симулятор</a>
+                    <a href="#team">Контакты</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- QR Code Modal (Simulated) -->
+    <div class="modal" id="qr-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3>Ваш QR-код готов!</h3>
+            <p>Отсканируйте код смартфоном, чтобы скачать персональное видео прохода и карту балансировки состояний.</p>
+            <div class="qr-placeholder">
+                <i class="fa-solid fa-qrcode"></i>
+            </div>
+            <span class="qr-id">ID: ST-2026-992</span>
+            <button class="btn btn-primary" id="btn-close-modal">Отлично</button>
+        </div>
+    </div>
+
+    <!-- Script -->
+    <script src="script.js"></script>
+</body>
+</html>

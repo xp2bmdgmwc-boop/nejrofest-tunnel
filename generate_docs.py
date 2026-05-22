@@ -12,9 +12,38 @@ from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.lib import colors
 
-# Define content data
+# Define content data for the form
 PROJECT_NAME = "Нейротуннель «Туннель Состояний» / Neurotunnel: The State Tunnel"
-TRACK = "Пространственные и предметные индустрии (Пространственные решения, арт-инсталляции, средовой дизайн)"
+STAGE = "Концепция"
+DIRECTION = "Пространственные и объектные индустрии (а также Цифровые и интерактивные, Звуковые и Музыкальные)"
+LEGAL_STATUS = "ИП (ИП Латыпов В. М.) или Физическое лицо"
+
+SHORT_DESC = (
+    "Нейротуннель «Туннель Состояний» — интерактивный шлюз на базе Эмотех, "
+    "бесконтактно считывающий биометрию человека и гармонизирующий его состояние "
+    "генеративным звуком и цветом."
+)  # 175 characters (strict limit is 200)
+
+RELEVANCE = (
+    "Жители мегаполисов находятся в состоянии хронического информационного стресса и ментального шума. "
+    "Приходя в музеи или галереи, люди часто не способны глубоко воспринимать культуру из-за накопленной тревожности. "
+    "Наш проект решает эту проблему на стыке эмоциональной архитектуры (Эмотех) и бесконтактной биометрии. "
+    "Нейротуннель бережно считывает состояние посетителя и моментально погружает его в компенсирующую звуковую и "
+    "цветовую среду, повышая восприимчивость к искусству."
+)  # 466 characters (strict limit is 1000)
+
+CURRENT_STATUS = (
+    "Разработана архитектурная и технологическая концепция в 5 масштабах (от выставочного модуля до городского моста). "
+    "Создан рабочий интерактивный веб-симулятор инсталляции с генеративным звуковым и визуальным движком. "
+    "Проведены предварительные исследования технологии бесконтактного rPPG-мониторинга. Имеется концептуальное видение "
+    "интеграции проекта на ГЭС-2 и мосту к Красному Октябрю. Подготовлен 3D-видеоролик (walkthrough) проекта."
+)
+
+RESOURCES_SOUGHT = [
+    "Партнёры и площадки (для пилотирования на ГЭС-2 и мостах Москвы)",
+    "Экспертиза и менторство (в части доработки алгоритмов биометрии)",
+    "Продюсерское сопровождение (для выхода на крупные городские и частные заказы)"
+]
 
 TEAM = [
     {
@@ -26,47 +55,6 @@ TEAM = [
         "role": "Технологический директор / Физик (Сенсоры, Оптика и Звук)",
         "name": "Валерий Латыпов",
         "bio": "Магистр наук по физике конденсированного состояния (НИЯУ МИФИ). Специалист в области квантовой оптики, акустики и сенсорных интерфейсов. Разработчик систем бесконтактного мониторинга физиологических показателей на основе rPPG (фотоплетизмографии) и компьютерного зрения."
-    }
-]
-
-CONCEPT_PROBLEM = (
-    "Современный житель мегаполиса находится в состоянии хронического информационного перегруза и стресса. "
-    "Приходя в культурные пространства (музеи, театры, галереи), человек приносит этот ментальный шум с собой. "
-    "Его восприятие заблокировано, он не готов к глубокому эмоциональному контакту с искусством. "
-    "Большинство существующих арт-объектов предлагают статичный или усредненный опыт для всей массы посетителей, "
-    "не адаптируясь под психоэмоциональное состояние конкретного зрителя."
-)
-
-CONCEPT_SOLUTION = (
-    "«Нейротуннель» спроектирован в новой концепции Эмотех (Emotech / Emotional Tech), направленной на создание "
-    "эмоционально отзывчивых терапевтических сред. Проект представляет собой физический шлюз-фильтр в виде цилиндрического "
-    "коридора или прямоугольной призмы с бесшовными LED-экранами на стыках. Проходя сквозь него, посетитель бесконтактно "
-    "сканируется встроенными сенсорами. Система определяет уровень стресса, усталости или хаоса и перестраивает под него "
-    "световое поле, направленный звук (бинауральные ритмы) и генеративную графику.\n\n"
-    "Человек проходит через иммерсивный сценарий жизненного цикла (от «рождения», через накопление опыта к «символической смерти» — "
-    "очищению белым светом, и психоэмоциональному катарсису/возрождению в зале адаптации)."
-)
-
-USPS = [
-    {
-        "title": "Абсолютная бесконтактность",
-        "desc": "Никаких датчиков на теле. Пульс и частота дыхания считываются ИК- и RGB-камерами по микро-колебаниям цвета кожи лица (rPPG), мимический тонус — алгоритмами Face Mesh, траектория движения — датчиками LiDAR."
-    },
-    {
-        "title": "Акустический барьер",
-        "desc": "Направленные звуковые прожекторы Audio Spotlight (угол направленности 3-5°) полностью изолируют человека от внешнего шума улицы или холла, создавая индивидуальную звуковую зону для каждого посетителя."
-    },
-    {
-        "title": "Социальная синестезия (Индивидуальные ауры в толпе)",
-        "desc": "При групповом проходе туннель не создает какофонии. Он проецирует индивидуальные световые кольца («ауры») вокруг каждого пешехода. При сближении людей цвета их аур плавно смешиваются (lerp-эффект), создавая гармонизирующий визуальный диалог."
-    },
-    {
-        "title": "Абсолютная конфиденциальность (Privacy by Design)",
-        "desc": "Все биометрические показатели обрабатываются исключительно в оперативной памяти «на лету» без сохранения на диски или отправки в облачные сервисы, полностью отвечая требованиям о защите персональных данных."
-    },
-    {
-        "title": "Визионерское масштабирование",
-        "desc": "Концепция масштабируется от локального шлюза в музее (ГЭС-2) до свето-акустических коридоров на мостах Москвы (включая переход от Храма Христа Спасителя к Красному Октябрю) и синхронизации с медиа-фасадами Москва-Сити и линиями метро в виде единой городской «Нейросети Мегаполиса»."
     }
 ]
 
@@ -106,7 +94,6 @@ def create_docx(filename):
 
     # Title
     title = doc.add_paragraph()
-    title.alignment = WD_ALIGN_PARAGRAPH.LEFT
     run_title = title.add_run(PROJECT_NAME.upper())
     run_title.font.name = 'Arial'
     run_title.font.size = Pt(18)
@@ -115,7 +102,7 @@ def create_docx(filename):
     title.paragraph_format.space_after = Pt(2)
 
     subtitle = doc.add_paragraph()
-    run_sub = subtitle.add_run("Заявка на участие в акселераторе #Нейрофест2026")
+    run_sub = subtitle.add_run("Материалы для заполнения анкеты проекта #Нейрофест2026")
     run_sub.font.name = 'Arial'
     run_sub.font.size = Pt(11)
     run_sub.font.italic = True
@@ -138,47 +125,77 @@ def create_docx(filename):
         h = doc.add_paragraph()
         run = h.add_run(text)
         run.font.name = 'Arial'
-        run.font.size = Pt(14)
+        run.font.size = Pt(13)
         run.font.bold = True
         run.font.color.rgb = RGBColor(15, 23, 42) # Slate 900
-        h.paragraph_format.space_before = Pt(14)
-        h.paragraph_format.space_after = Pt(6)
+        h.paragraph_format.space_before = Pt(12)
+        h.paragraph_format.space_after = Pt(4)
         h.paragraph_format.keep_with_next = True
         return h
 
-    # 1. Track
-    add_section_heading("НАПРАВЛЕНИЕ / НОМИНАЦИЯ")
-    p = doc.add_paragraph()
-    p.add_run(TRACK).font.bold = True
-    p.paragraph_format.space_after = Pt(12)
+    # Loop through form fields
+    fields = [
+        ("Наименование проекта *", PROJECT_NAME),
+        ("Стадия проекта *", STAGE),
+        ("Направление проекта *", DIRECTION),
+        ("Юридический статус *", LEGAL_STATUS),
+        ("Краткое описание * (лимит 200 символов)", SHORT_DESC),
+        ("Актуальность проекта * (лимит 1000 символов)", RELEVANCE),
+        ("Статус реализации на сегодняшний день *", CURRENT_STATUS),
+    ]
 
-    # 2. Problem
-    add_section_heading("1. КАКУЮ ПРОБЛЕМУ РЕШАЕТ ПРОЕКТ?")
-    p = doc.add_paragraph(CONCEPT_PROBLEM)
-    p.paragraph_format.space_after = Pt(12)
+    add_section_heading("ПОЛЯ ДЛЯ ЗАПОЛНЕНИЯ В АНКЕТЕ")
 
-    # 3. Solution
-    add_section_heading("2. СУТЬ РЕШЕНИЯ И КОНЦЕПЦИЯ")
-    p = doc.add_paragraph(CONCEPT_SOLUTION)
-    p.paragraph_format.space_after = Pt(12)
+    for field_name, value in fields:
+        p_name = doc.add_paragraph()
+        run_fn = p_name.add_run(f"■ {field_name}:")
+        run_fn.bold = True
+        run_fn.font.color.rgb = RGBColor(71, 85, 105)
+        p_name.paragraph_format.space_before = Pt(6)
+        p_name.paragraph_format.space_after = Pt(2)
+        p_name.paragraph_format.keep_with_next = True
 
-    # 4. USPs
-    add_section_heading("3. УНИКАЛЬНОСТЬ И ТЕХНОЛОГИЧЕСКАЯ НОВИЗНА (УТП)")
-    for i, usp in enumerate(USPS, 1):
-        p = doc.add_paragraph()
-        p.paragraph_format.left_indent = Inches(0.2)
-        run_title = p.add_run(f"3.{i}. {usp['title']}: ")
-        run_title.bold = True
-        run_title.font.color.rgb = RGBColor(15, 23, 42)
-        p.add_run(usp['desc'])
-        p.paragraph_format.space_after = Pt(6)
+        p_val = doc.add_paragraph()
+        p_val.paragraph_format.left_indent = Inches(0.2)
+        run_val = p_val.add_run(value)
+        run_val.font.color.rgb = RGBColor(15, 23, 42)
+        p_val.paragraph_format.space_after = Pt(10)
 
-    # 5. Tech Specs Table
-    add_section_heading("4. ТЕХНИЧЕСКИЕ ХАРАКТЕРИСТИКИ И ОБОРУДОВАНИЕ")
+    # Resources
+    p_res_title = doc.add_paragraph()
+    run_rt = p_res_title.add_run("■ Какой основной ресурс вы ищете в Акселераторе? * (отметить галочками)")
+    run_rt.bold = True
+    run_rt.font.color.rgb = RGBColor(71, 85, 105)
+    p_res_title.paragraph_format.space_before = Pt(6)
+    p_res_title.paragraph_format.space_after = Pt(2)
+    p_res_title.paragraph_format.keep_with_next = True
+
+    for res in RESOURCES_SOUGHT:
+        p_res = doc.add_paragraph()
+        p_res.paragraph_format.left_indent = Inches(0.2)
+        p_res.paragraph_format.space_after = Pt(3)
+        run_chk = p_res.add_run("✓  ")
+        run_chk.bold = True
+        run_chk.font.color.rgb = RGBColor(212, 175, 55)
+        p_res.add_run(res)
+
+    p_div2 = doc.add_paragraph()
+    p_div2.paragraph_format.space_before = Pt(14)
+    p_div2.paragraph_format.space_after = Pt(14)
+    p_div2_border = OxmlElement('w:pBdr')
+    bottom_border2 = OxmlElement('w:bottom')
+    bottom_border2.set(qn('w:val'), 'single')
+    bottom_border2.set(qn('w:sz'), '4')
+    bottom_border2.set(qn('w:space'), '1')
+    bottom_border2.set(qn('w:color'), 'E2E8F0')
+    p_div2_border.append(bottom_border2)
+    p_div2._p.get_or_add_pPr().append(p_div2_border)
+
+    # 4. Tech Specs Table
+    add_section_heading("ДОПОЛНИТЕЛЬНО: ТЕХНИЧЕСКИЕ ХАРАКТЕРИСТИКИ")
     table = doc.add_table(rows=1, cols=2)
     table.autofit = False
     
-    # Style table
     tblPr = table._tbl.tblPr
     borders = parse_xml(
         '<w:tblBorders %s>'
@@ -210,8 +227,8 @@ def create_docx(filename):
         
     doc.add_paragraph().paragraph_format.space_after = Pt(12)
 
-    # 6. Team
-    add_section_heading("5. КОМАНДА ПРОЕКТА")
+    # 5. Team
+    add_section_heading("КОМАНДА ПРОЕКТА")
     for t in TEAM:
         p = doc.add_paragraph()
         run_name = p.add_run(f"{t['name']} — {t['role']}\n")
@@ -219,11 +236,11 @@ def create_docx(filename):
         run_name.font.color.rgb = RGBColor(15, 23, 42)
         run_bio = p.add_run(t['bio'])
         run_bio.font.size = Pt(10)
-        run_bio.font.color.rgb = RGBColor(71, 85, 105) # Slate 600
+        run_bio.font.color.rgb = RGBColor(71, 85, 105)
         p.paragraph_format.space_after = Pt(10)
 
-    # 7. Links
-    add_section_heading("6. МАТЕРИАЛЫ И ССЫЛКИ ДЛЯ ПРИКРЕПЛЕНИЯ К ЗАЯВКЕ")
+    # 6. Links
+    add_section_heading("МАТЕРИАЛЫ И ССЫЛКИ ДЛЯ ПРИКРЕПЛЕНИЯ К ЗАЯВКЕ")
     for name, url in LINKS:
         p = doc.add_paragraph()
         p.paragraph_format.left_indent = Inches(0.2)
@@ -234,17 +251,17 @@ def create_docx(filename):
         run_name = p.add_run(f"{name}: ")
         run_name.bold = True
         run_url = p.add_run(url)
-        run_url.font.color.rgb = RGBColor(14, 165, 233) # Sky 500
+        run_url.font.color.rgb = RGBColor(14, 165, 233)
         run_url.underline = True
 
     # Footer note
     doc.add_paragraph().paragraph_format.space_after = Pt(18)
     p_foot = doc.add_paragraph()
     p_foot.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    run_foot = p_foot.add_run("Документ подготовлен автоматически для отправки партнёрам и соавторам проекта.")
+    run_foot = p_foot.add_run("Документ подготовлен для Алёны Левицкой и Валерия Латыпова. Скопируйте нужные разделы напрямую в веб-форму.")
     run_foot.font.size = Pt(8.5)
     run_foot.font.italic = True
-    run_foot.font.color.rgb = RGBColor(148, 163, 184) # Slate 400
+    run_foot.font.color.rgb = RGBColor(148, 163, 184)
 
     doc.save(filename)
     print(f"Word document saved to {filename}")
@@ -255,10 +272,10 @@ def create_pdf(filename):
     doc = SimpleDocTemplate(
         filename,
         pagesize=A4,
-        rightMargin=45,
-        leftMargin=45,
-        topMargin=45,
-        bottomMargin=45
+        rightMargin=40,
+        leftMargin=40,
+        topMargin=40,
+        bottomMargin=40
     )
 
     # Font registrations
@@ -273,8 +290,8 @@ def create_pdf(filename):
         'DocTitle',
         parent=styles['Normal'],
         fontName='Arial-Bold',
-        fontSize=16,
-        leading=20,
+        fontSize=15,
+        leading=19,
         textColor=colors.HexColor('#0f172a'),
         spaceAfter=4
     )
@@ -286,18 +303,30 @@ def create_pdf(filename):
         fontSize=10,
         leading=13,
         textColor=colors.HexColor('#d4af37'),
-        spaceAfter=15
+        spaceAfter=12
     )
     
-    h1_style = ParagraphStyle(
-        'DocH1',
+    section_title_style = ParagraphStyle(
+        'DocSecTitle',
         parent=styles['Normal'],
         fontName='Arial-Bold',
         fontSize=11,
         leading=14,
         textColor=colors.HexColor('#0f172a'),
         spaceBefore=14,
-        spaceAfter=6,
+        spaceAfter=8,
+        keepWithNext=True
+    )
+
+    field_title_style = ParagraphStyle(
+        'DocFieldTitle',
+        parent=styles['Normal'],
+        fontName='Arial-Bold',
+        fontSize=9.5,
+        leading=12,
+        textColor=colors.HexColor('#475569'),
+        spaceBefore=8,
+        spaceAfter=2,
         keepWithNext=True
     )
 
@@ -307,38 +336,27 @@ def create_pdf(filename):
         fontName='Arial',
         fontSize=9.5,
         leading=13,
-        textColor=colors.HexColor('#334155'),
-        spaceAfter=8
-    )
-
-    usp_title_style = ParagraphStyle(
-        'DocUSPTitle',
-        parent=styles['Normal'],
-        fontName='Arial-Bold',
-        fontSize=9.5,
-        leading=13,
-        textColor=colors.HexColor('#0f172a'),
-        spaceBefore=4,
-        spaceAfter=2,
+        textColor=colors.HexColor('#1e293b'),
+        spaceAfter=6,
         leftIndent=10
     )
 
-    usp_desc_style = ParagraphStyle(
-        'DocUSPDesc',
+    bullet_style = ParagraphStyle(
+        'DocBullet',
         parent=styles['Normal'],
         fontName='Arial',
         fontSize=9,
-        leading=12.5,
-        textColor=colors.HexColor('#475569'),
-        spaceAfter=6,
-        leftIndent=10
+        leading=13,
+        textColor=colors.HexColor('#1e293b'),
+        leftIndent=15,
+        spaceAfter=3
     )
 
     table_header_style = ParagraphStyle(
         'TableHeader',
         parent=styles['Normal'],
         fontName='Arial-Bold',
-        fontSize=9,
+        fontSize=8.5,
         leading=11,
         textColor=colors.HexColor('#0f172a')
     )
@@ -347,8 +365,8 @@ def create_pdf(filename):
         'TableCellBold',
         parent=styles['Normal'],
         fontName='Arial-Bold',
-        fontSize=8.5,
-        leading=11,
+        fontSize=8,
+        leading=10.5,
         textColor=colors.HexColor('#334155')
     )
 
@@ -356,8 +374,8 @@ def create_pdf(filename):
         'TableCellNormal',
         parent=styles['Normal'],
         fontName='Arial',
-        fontSize=8.5,
-        leading=11,
+        fontSize=8,
+        leading=10.5,
         textColor=colors.HexColor('#475569')
     )
 
@@ -386,10 +404,10 @@ def create_pdf(filename):
 
     # Title & Header
     story.append(Paragraph(PROJECT_NAME.upper(), title_style))
-    story.append(Paragraph("Заявка на участие в акселераторе #Нейрофест2026", subtitle_style))
+    story.append(Paragraph("Шпаргалка для заполнения анкеты проекта #Нейрофест2026", subtitle_style))
     
     # Custom Divider Line
-    divider = Table([['']], colWidths=[505], rowHeights=[1.5])
+    divider = Table([['']], colWidths=[515], rowHeights=[1.5])
     divider.setStyle(TableStyle([
         ('BACKGROUND', (0,0), (-1,-1), colors.HexColor('#CCCCCC')),
         ('TOPPADDING', (0,0), (-1,-1), 0),
@@ -398,30 +416,32 @@ def create_pdf(filename):
     story.append(divider)
     story.append(Spacer(1, 10))
 
-    # Track
-    story.append(Paragraph("НАПРАВЛЕНИЕ / НОМИНАЦИЯ", h1_style))
-    story.append(Paragraph(f"<b>{TRACK}</b>", body_style))
+    # Form Fields Section
+    story.append(Paragraph("ПОЛЯ ДЛЯ ЗАПОЛНЕНИЯ В ВЕБ-ФОРМЕ", section_title_style))
 
-    # 1. Problem
-    story.append(Paragraph("1. КАКУЮ ПРОБЛЕМУ РЕШАЕТ ПРОЕКТ?", h1_style))
-    story.append(Paragraph(CONCEPT_PROBLEM, body_style))
+    fields = [
+        ("Наименование проекта *", PROJECT_NAME),
+        ("Стадия проекта *", STAGE),
+        ("Направление проекта *", DIRECTION),
+        ("Юридический статус *", LEGAL_STATUS),
+        ("Краткое описание * (лимит 200 символов)", SHORT_DESC),
+        ("Актуальность проекта * (лимит 1000 символов)", RELEVANCE),
+        ("Статус реализации на сегодняшний день *", CURRENT_STATUS),
+    ]
 
-    # 2. Solution
-    story.append(Paragraph("2. СУТЬ РЕШЕНИЯ И КОНЦЕПЦИЯ", h1_style))
-    # Replace newlines with break tags for ReportLab Paragraph compatibility
-    sol_html = CONCEPT_SOLUTION.replace('\n', '<br/>')
-    story.append(Paragraph(sol_html, body_style))
+    for field_name, value in fields:
+        story.append(Paragraph(f"■ {field_name}", field_title_style))
+        story.append(Paragraph(value, body_style))
 
-    # 3. USPs
-    story.append(Paragraph("3. УНИКАЛЬНОСТЬ И ТЕХНОЛОГИЧЕСКАЯ НОВИЗНА (УТП)", h1_style))
-    for i, usp in enumerate(USPS, 1):
-        story.append(Paragraph(f"3.{i}. {usp['title']}", usp_title_style))
-        story.append(Paragraph(usp['desc'], usp_desc_style))
+    story.append(Paragraph("■ Какой основной ресурс вы ищете в Акселераторе? * (отметить галочками)", field_title_style))
+    for res in RESOURCES_SOUGHT:
+        story.append(Paragraph(f"<font color='#d4af37'><b>✓</b></font>  {res}", bullet_style))
 
-    story.append(Spacer(1, 6))
+    story.append(Spacer(1, 10))
+    story.append(divider)
 
-    # 4. Tech Specs Table
-    story.append(Paragraph("4. ТЕХНИЧЕСКИЕ ХАРАКТЕРИСТИКИ И ОБОРУДОВАНИЕ", h1_style))
+    # Tech Specs Table
+    story.append(Paragraph("ДОПОЛНИТЕЛЬНО: ТЕХНИЧЕСКИЕ ХАРАКТЕРИСТИКИ", section_title_style))
     
     table_data = [
         [Paragraph("Компонент", table_header_style), Paragraph("Техническое описание", table_header_style)]
@@ -432,11 +452,11 @@ def create_pdf(filename):
             Paragraph(desc, table_cell_normal)
         ])
     
-    tech_table = Table(table_data, colWidths=[130, 375])
+    tech_table = Table(table_data, colWidths=[120, 395])
     tech_table.setStyle(TableStyle([
         ('LINEBELOW', (0,0), (-1,-1), 0.5, colors.HexColor('#E2E8F0')),
-        ('BOTTOMPADDING', (0,0), (-1,-1), 5),
-        ('TOPPADDING', (0,0), (-1,-1), 5),
+        ('BOTTOMPADDING', (0,0), (-1,-1), 4),
+        ('TOPPADDING', (0,0), (-1,-1), 4),
         ('VALIGN', (0,0), (-1,-1), 'TOP'),
         ('LEFTPADDING', (0,0), (-1,-1), 0),
         ('RIGHTPADDING', (0,0), (-1,-1), 5),
@@ -444,14 +464,14 @@ def create_pdf(filename):
     story.append(tech_table)
     story.append(Spacer(1, 10))
 
-    # 5. Team
-    story.append(Paragraph("5. КОМАНДА ПРОЕКТА", h1_style))
+    # Team
+    story.append(Paragraph("КОМАНДА ПРОЕКТА", section_title_style))
     for t in TEAM:
         team_text = f"<b>{t['name']}</b> — {t['role']}<br/><font color='#475569' size='8.5'>{t['bio']}</font>"
         story.append(Paragraph(team_text, body_style))
 
-    # 6. Links
-    story.append(Paragraph("6. МАТЕРИАЛЫ И ССЫЛКИ ДЛЯ ЗАЯВКИ", h1_style))
+    # Links
+    story.append(Paragraph("МАТЕРИАЛЫ И ССЫЛКИ ДЛЯ ПРИКРЕПЛЕНИЯ", section_title_style))
     for name, url in LINKS:
         story.append(Paragraph(f"•  <b>{name}</b>", link_label_style))
         story.append(Paragraph(f"<a href='{url}'>{url}</a>", link_url_style))

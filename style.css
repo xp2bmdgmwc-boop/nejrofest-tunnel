@@ -17,6 +17,7 @@
     
     --font-sans: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     --font-serif: 'Playfair Display', Georgia, serif;
+    --font-mono: 'Space Mono', monospace;
     
     --transition-smooth: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     --border-radius-lg: 16px;
@@ -369,6 +370,29 @@ a {
     }
 }
 
+@keyframes revealUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.matrix-portal .reveal-init,
+body.simulation-active .reveal-init {
+    opacity: 0;
+    animation: revealUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.stagger-1 { animation-delay: 100ms; }
+.stagger-2 { animation-delay: 220ms; }
+.stagger-3 { animation-delay: 340ms; }
+.stagger-4 { animation-delay: 460ms; }
+.stagger-5 { animation-delay: 580ms; }
+
 /* Concept Section */
 .concept-section {
     border-top: 1px solid rgba(255, 255, 255, 0.05);
@@ -460,6 +484,99 @@ a {
     align-items: center;
 }
 
+/* CRT Scanline Overlay */
+.sim-screen::after {
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.2) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+    z-index: 2;
+    background-size: 100% 4px, 6px 100%;
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+/* Diagnostic Overlays */
+.live-indicator {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 6;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    pointer-events: none;
+}
+
+.live-dot {
+    width: 6px;
+    height: 6px;
+    background-color: #ef4444;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #ef4444;
+    animation: simpleBlink 1.5s infinite;
+}
+
+@keyframes simpleBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+.live-text {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.session-indicator {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 6;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: #10b981;
+    text-shadow: 0 0 6px rgba(16, 185, 129, 0.3);
+    pointer-events: none;
+}
+
+.telemetry-overlay {
+    position: absolute;
+    bottom: 85px;
+    left: 20px;
+    right: 20px;
+    z-index: 6;
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.4);
+    pointer-events: none;
+    border-top: 1px dashed rgba(255, 255, 255, 0.08);
+    padding-top: 8px;
+}
+
+.telemetry-item {
+    display: flex;
+    gap: 6px;
+}
+
+.telemetry-item .t-label {
+    color: var(--text-muted);
+}
+
+.telemetry-item .t-val {
+    color: var(--accent);
+    text-shadow: 0 0 6px rgba(212, 175, 55, 0.2);
+    transition: var(--transition-smooth);
+}
+
 @media (min-width: 768px) {
     .sim-screen {
         height: 500px;
@@ -498,6 +615,7 @@ a {
     border-radius: 50px;
     font-size: 0.85rem;
     font-weight: 600;
+    font-family: var(--font-mono);
     display: flex;
     align-items: center;
     gap: 8px;
@@ -692,6 +810,7 @@ a {
     font-size: 0.65rem;
     font-weight: 800;
     letter-spacing: 0.05em;
+    font-family: var(--font-mono);
     background-color: rgba(255, 255, 255, 0.05);
     padding: 3px 8px;
     border-radius: 4px;
@@ -2007,3 +2126,51 @@ a {
         opacity: 0;
     }
 }
+
+/* Technical Corner Ticks for Hardware Card Styling */
+.sim-card, .step-card, .souvenir-mock, .scale-card {
+    position: relative;
+}
+
+.sim-card::before, .step-card::before, .souvenir-mock::before, .scale-card::before,
+.sim-card::after, .step-card::after, .souvenir-mock::after, .scale-card::after {
+    content: "";
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    pointer-events: none;
+    z-index: 3;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Top-Left Corner Tick */
+.sim-card::before, .step-card::before, .souvenir-mock::before, .scale-card::before {
+    top: -1px;
+    left: -1px;
+    border-top: 1.5px solid var(--accent);
+    border-left: 1.5px solid var(--accent);
+}
+
+/* Bottom-Right Corner Tick */
+.sim-card::after, .step-card::after, .souvenir-mock::after, .scale-card::after {
+    bottom: -1px;
+    right: -1px;
+    border-bottom: 1.5px solid var(--accent);
+    border-right: 1.5px solid var(--accent);
+}
+
+/* Hover effects for ticks: expand slightly */
+.sim-card:hover::before, .step-card:hover::before, .scale-card:hover::before {
+    top: -4px;
+    left: -4px;
+    width: 10px;
+    height: 10px;
+}
+
+.sim-card:hover::after, .step-card:hover::after, .scale-card:hover::after {
+    bottom: -4px;
+    right: -4px;
+    width: 10px;
+    height: 10px;
+}
+

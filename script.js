@@ -405,6 +405,31 @@ stateButtons.forEach(btn => {
         document.getElementById('frequency-val').textContent = state.freqLabel;
         document.getElementById('souvenir-desc').textContent = state.desc;
         
+        // Update telemetry data dynamically
+        const rppgElem = document.getElementById('telemetry-rppg');
+        const hrElem = document.getElementById('telemetry-hr');
+        const phaseElem = document.getElementById('telemetry-phase');
+        
+        if (rppgElem && hrElem && phaseElem) {
+            if (activeStateKey === 'stress') {
+                rppgElem.textContent = '96%';
+                hrElem.textContent = '115 bpm';
+                phaseElem.textContent = '6Hz (Theta)';
+            } else if (activeStateKey === 'apathy') {
+                rppgElem.textContent = '88%';
+                hrElem.textContent = '58 bpm';
+                phaseElem.textContent = '12Hz (Alpha)';
+            } else if (activeStateKey === 'chaos') {
+                rppgElem.textContent = '92%';
+                hrElem.textContent = '89 bpm';
+                phaseElem.textContent = '8Hz (Alpha)';
+            } else if (activeStateKey === 'balance') {
+                rppgElem.textContent = '99%';
+                hrElem.textContent = '68 bpm';
+                phaseElem.textContent = 'PURE TONE';
+            }
+        }
+        
         // Update Glow Backgrounds based on state
         const glow1 = document.getElementById('glow-1');
         if (glow1) {
@@ -586,6 +611,7 @@ function exitIntroPortal() {
 
     // Unlock page scroll
     document.body.classList.remove('scroll-locked');
+    document.body.classList.add('simulation-active');
 
     // Programmatically select state in simulator
     const btn = document.querySelector(`.btn-state[data-state="${chosenStateKey}"]`);

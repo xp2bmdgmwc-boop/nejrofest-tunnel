@@ -8,7 +8,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <!-- FontAwesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
@@ -21,24 +21,24 @@
         
         <!-- Step 1: Start Screen -->
         <div id="matrix-start-screen" class="matrix-content start-screen-active" style="transition: opacity 0.5s ease;">
-            <div class="matrix-badge">Нейротуннель «Туннель Состояний»</div>
-            <h1 class="matrix-title" style="letter-spacing: 6px; font-size: clamp(24px, 4vw, 42px); margin-bottom: 50px;">СИМУЛЯЦИЯ ЗАПУЩЕНА</h1>
-            <div class="start-btn-container" style="margin-bottom: 40px;">
+            <div class="matrix-badge reveal-init stagger-1">Нейротуннель «Туннель Состояний»</div>
+            <h1 class="matrix-title reveal-init stagger-2" style="letter-spacing: 6px; font-size: clamp(24px, 4vw, 42px); margin-bottom: 50px;">СИМУЛЯЦИЯ ЗАПУЩЕНА</h1>
+            <div class="start-btn-container reveal-init stagger-3" style="margin-bottom: 40px;">
                 <button id="start-simulation-btn" class="pill-btn start-sim-btn">
                     <div class="pulse-ring-red"></div>
                     <span class="start-btn-text">НАЧАТЬ СИМУЛЯЦИЮ</span>
                 </button>
             </div>
-            <div class="matrix-choice-hint" style="color: #64748b; font-size: 13px;">Интерактивный пространственный фильтр человека</div>
+            <div class="matrix-choice-hint reveal-init stagger-4" style="color: #64748b; font-size: 13px;">Интерактивный пространственный фильтр человека</div>
         </div>
 
         <!-- Step 2: Choice Screen (hidden initially) -->
         <div id="matrix-choice-screen" class="matrix-content" style="display: none; opacity: 0; transition: opacity 0.8s ease;">
-            <div class="matrix-badge">Нейротуннель «Туннель Состояний»</div>
-            <h1 class="matrix-title">СДЕЛАЙ СВОЙ ВЫБОР</h1>
-            <p class="matrix-subtitle">Нажмите на одну из пилюль, чтобы запустить симуляцию и войти на платформу</p>
+            <div class="matrix-badge reveal-init stagger-1">Нейротуннель «Туннель Состояний»</div>
+            <h1 class="matrix-title reveal-init stagger-2">СДЕЛАЙ СВОЙ ВЫБОР</h1>
+            <p class="matrix-subtitle reveal-init stagger-3">Нажмите на одну из пилюль, чтобы запустить симуляцию и войти на платформу</p>
             
-            <div class="pills-container">
+            <div class="pills-container reveal-init stagger-4">
                 <button class="pill-btn pill-red" id="pill-red-btn" data-state="stress">
                     <div class="pill-visual"></div>
                     <span class="pill-label">КРАСНАЯ ТАБЛЕТКА</span>
@@ -52,7 +52,7 @@
                 </button>
             </div>
             
-            <div class="matrix-choice-hint">Ваш выбор определит начальную частоту и цвет пространства при входе</div>
+            <div class="matrix-choice-hint reveal-init stagger-5">Ваш выбор определит начальную частоту и цвет пространства при входе</div>
         </div>
     </div>
 
@@ -72,7 +72,7 @@
     <div class="ambient-glow" id="glow-2"></div>
 
     <!-- Navigation -->
-    <header class="header">
+    <header class="header reveal-init stagger-1">
         <div class="logo">
             <span class="logo-main">THE STATE TUNNEL</span>
             <span class="logo-sub">НЕЙРОТУННЕЛЬ «ТУННЕЛЬ СОСТОЯНИЙ»</span>
@@ -95,10 +95,10 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <div class="badge">Проект для акселератора #Нейрофест2026</div>
-            <h1 class="hero-title">Пространственный фильтр человека</h1>
-            <p class="hero-subtitle">Архитектурный свето-акустический шлюз, трансформирующий психоэмоциональное состояние через физическое пространство, квантовую оптику и биометрию.</p>
-            <div class="hero-actions">
+            <div class="badge reveal-init stagger-2">Проект для акселератора #Нейрофест2026</div>
+            <h1 class="hero-title reveal-init stagger-3">Пространственный фильтр человека</h1>
+            <p class="hero-subtitle reveal-init stagger-4">Архитектурный свето-акустический шлюз, трансформирующий психоэмоциональное состояние через физическое пространство, квантовую оптику и биометрию.</p>
+            <div class="hero-actions reveal-init stagger-5">
                 <a href="#simulator" class="btn btn-primary">Запустить симулятор</a>
                 <a href="#concept" class="btn btn-secondary">Подробнее о проекте</a>
             </div>
@@ -195,16 +195,33 @@
                 <!-- Visual Canvas Screen -->
                 <div class="sim-screen" id="sim-screen">
                     <canvas id="visual-canvas"></canvas>
+                    
+                    <!-- Hardware overlays -->
+                    <div class="live-indicator">
+                        <span class="live-dot"></span>
+                        <span class="live-text">REC // LIVE_READOUT</span>
+                    </div>
+                    <div class="session-indicator">
+                        [SESSION: ACTIVE]
+                    </div>
+                    
                     <div class="screen-overlay">
                         <div class="state-indicator">
                             <span class="label">Текущее состояние:</span>
-                            <span class="value" id="current-state-val">Стресс / Суета</span>
+                            <span class="value" id="current-state-val">Стресс / Тревога</span>
                         </div>
                         <div class="frequency-indicator">
                             <i class="fa-solid fa-wave-square"></i>
-                            <span id="frequency-val">Тета-частота (100Гц / 106Гц)</span>
+                            <span id="frequency-val">Тета-частота (150Гц / 156Гц)</span>
                         </div>
                     </div>
+                    
+                    <div class="telemetry-overlay">
+                        <div class="telemetry-item"><span class="t-label">rPPG Quality:</span> <span id="telemetry-rppg" class="t-val">96%</span></div>
+                        <div class="telemetry-item"><span class="t-label">HR Sensor:</span> <span id="telemetry-hr" class="t-val">115 bpm</span></div>
+                        <div class="telemetry-item"><span class="t-label">Phase Shift:</span> <span id="telemetry-phase" class="t-val">6Hz</span></div>
+                    </div>
+                    
                     <!-- Audio Control Overlay -->
                     <button class="audio-toggle" id="audio-toggle" title="Включить/выключить звук">
                         <i class="fa-solid fa-volume-xmark"></i>

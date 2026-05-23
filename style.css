@@ -1,18 +1,18 @@
 /* Modern Premium Dark Mode Design System for 'The State Tunnel' */
 
 :root {
-    --bg-dark: #06060a;
-    --bg-card: #0d0d16;
-    --bg-card-hover: #141422;
+    --bg-dark: #020204;
+    --bg-card: #08080f;
+    --bg-card-hover: #121222;
     --text-primary: #f8fafc;
     --text-secondary: #94a3b8;
     --text-muted: #64748b;
-    --accent: #d4af37; /* Luxe Gold */
-    --accent-hover: #b8962e;
+    --accent: #00f0ff; /* Luxe Gold */
+    --accent-hover: #00cbd6;
     
-    --color-stress: #0ea5e9; /* Sky Blue */
-    --color-apathy: #f59e0b; /* Amber */
-    --color-chaos: #a855f7; /* Purple */
+    --color-stress: #00f0ff; /* Sky Blue */
+    --color-apathy: #ff9e00; /* Amber */
+    --color-chaos: #d946ef; /* Purple */
     --color-balance: #ffffff; /* White */
     
     --font-sans: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -20,10 +20,10 @@
     --font-mono: 'Space Mono', monospace;
     
     --transition-smooth: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-    --border-radius-lg: 16px;
-    --border-radius-md: 8px;
+    --border-radius-lg: 4px;
+    --border-radius-md: 2px;
     
-    --glow-color: rgba(212, 175, 55, 0.15);
+    --glow-color: rgba(0, 240, 255, 0.15);
 }
 
 /* Global Reset */
@@ -199,7 +199,7 @@ a {
 
 .btn-primary:hover {
     background-color: var(--accent);
-    box-shadow: 0 0 25px rgba(212, 175, 55, 0.4);
+    box-shadow: 0 0 25px rgba(0, 240, 255, 0.4);
     transform: translateY(-2px);
 }
 
@@ -313,9 +313,9 @@ a {
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    background-color: rgba(212, 175, 55, 0.1);
+    background-color: rgba(0, 240, 255, 0.1);
     color: var(--accent);
-    border: 1px solid rgba(212, 175, 55, 0.2);
+    border: 1px solid rgba(0, 240, 255, 0.2);
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
@@ -573,7 +573,7 @@ body.simulation-active .reveal-init {
 
 .telemetry-item .t-val {
     color: var(--accent);
-    text-shadow: 0 0 6px rgba(212, 175, 55, 0.2);
+    text-shadow: 0 0 6px rgba(0, 240, 255, 0.2);
     transition: var(--transition-smooth);
 }
 
@@ -650,7 +650,7 @@ body.simulation-active .reveal-init {
 .audio-toggle:hover {
     background-color: var(--accent);
     color: var(--bg-dark);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 10px 25px rgba(212, 175, 55, 0.4);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 10px 25px rgba(0, 240, 255, 0.4);
 }
 
 .audio-toggle:active {
@@ -725,25 +725,25 @@ body.simulation-active .reveal-init {
 .btn-state.active[data-state="stress"] {
     border-color: var(--color-stress);
     color: var(--color-stress);
-    background-color: rgba(14, 165, 233, 0.05);
+    background-color: rgba(0, 240, 255, 0.08);
 }
 
 .btn-state.active[data-state="apathy"] {
     border-color: var(--color-apathy);
     color: var(--color-apathy);
-    background-color: rgba(245, 158, 11, 0.05);
+    background-color: rgba(255, 158, 0, 0.08);
 }
 
 .btn-state.active[data-state="chaos"] {
     border-color: var(--color-chaos);
     color: var(--color-chaos);
-    background-color: rgba(168, 85, 247, 0.05);
+    background-color: rgba(217, 70, 239, 0.08);
 }
 
 .btn-state.active[data-state="balance"] {
     border-color: var(--accent);
     color: var(--accent);
-    background-color: rgba(212, 175, 55, 0.05);
+    background-color: rgba(0, 240, 255, 0.05);
 }
 
 /* Souvenir Widget */
@@ -782,7 +782,7 @@ body.simulation-active .reveal-init {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background-color: rgba(212, 175, 55, 0.15);
+    background-color: rgba(0, 240, 255, 0.15);
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -861,7 +861,7 @@ body.simulation-active .reveal-init {
 .step-card:hover {
     background-color: var(--bg-card-hover);
     transform: translateY(-5px);
-    border-color: rgba(212, 175, 55, 0.2);
+    border-color: rgba(0, 240, 255, 0.2);
 }
 
 .step-num {
@@ -875,7 +875,7 @@ body.simulation-active .reveal-init {
 }
 
 .step-card:hover .step-num {
-    color: rgba(212, 175, 55, 0.05);
+    color: rgba(0, 240, 255, 0.05);
     transform: scale(1.1);
 }
 
@@ -986,7 +986,7 @@ body.simulation-active .reveal-init {
 }
 
 .author-card:hover {
-    border-color: rgba(212, 175, 55, 0.2);
+    border-color: rgba(0, 240, 255, 0.2);
 }
 
 .author-header {
@@ -1258,7 +1258,7 @@ body.simulation-active .reveal-init {
 
 .scale-card:hover {
     transform: translateY(-5px);
-    border-color: rgba(212, 175, 55, 0.2);
+    border-color: rgba(0, 240, 255, 0.2);
     background-color: var(--bg-card-hover);
 }
 
@@ -1354,8 +1354,8 @@ body.simulation-active .reveal-init {
 .usp-icon {
     font-size: 1.8rem;
     color: var(--accent);
-    background-color: rgba(212, 175, 55, 0.05);
-    border: 1px solid rgba(212, 175, 55, 0.15);
+    background-color: rgba(0, 240, 255, 0.05);
+    border: 1px solid rgba(0, 240, 255, 0.15);
     width: 60px;
     height: 60px;
     border-radius: 50%;
@@ -1601,14 +1601,14 @@ body.simulation-active .reveal-init {
 }
 
 .network-card-main.highlight-card {
-    border-color: rgba(212, 175, 55, 0.25);
+    border-color: rgba(0, 240, 255, 0.25);
     background: rgba(20, 16, 10, 0.3);
-    box-shadow: 0 0 35px rgba(212, 175, 55, 0.03);
+    box-shadow: 0 0 35px rgba(0, 240, 255, 0.03);
 }
 
 .network-card-main.highlight-card:hover {
-    border-color: rgba(212, 175, 55, 0.5);
-    box-shadow: 0 15px 45px rgba(212, 175, 55, 0.15);
+    border-color: rgba(0, 240, 255, 0.5);
+    box-shadow: 0 15px 45px rgba(0, 240, 255, 0.15);
 }
 
 .network-image-wrapper {
@@ -1670,10 +1670,10 @@ body.simulation-active .reveal-init {
 }
 
 .network-badge-overlay.special {
-    border-color: rgba(212, 175, 55, 0.4);
-    color: #d4af37;
+    border-color: rgba(0, 240, 255, 0.4);
+    color: #00f0ff;
     background: rgba(18, 12, 4, 0.9);
-    box-shadow: 0 0 15px rgba(212, 175, 55, 0.15);
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.15);
 }
 
 .network-card-content {
@@ -1723,11 +1723,11 @@ body.simulation-active .reveal-init {
 }
 
 .highlight-card .concept-features i {
-    color: #d4af37;
+    color: #00f0ff;
 }
 
 .network-quote {
-    border-left: 3px solid #d4af37;
+    border-left: 3px solid #00f0ff;
     padding-left: 20px;
     margin-top: 50px;
     font-style: italic;
@@ -1735,7 +1735,7 @@ body.simulation-active .reveal-init {
 
 .network-quote i {
     font-size: 24px;
-    color: rgba(212, 175, 55, 0.25);
+    color: rgba(0, 240, 255, 0.25);
     margin-bottom: 10px;
     display: block;
 }
@@ -1804,15 +1804,15 @@ body.simulation-active .reveal-init {
     font-size: 12px;
     font-weight: 600;
     letter-spacing: 3px;
-    color: #d4af37;
+    color: #00f0ff;
     text-transform: uppercase;
-    border: 1px solid rgba(212, 175, 55, 0.3);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 0 15px rgba(212, 175, 55, 0.1);
+    border: 1px solid rgba(0, 240, 255, 0.3);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 0 15px rgba(0, 240, 255, 0.1);
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
     padding: 6px 16px;
     border-radius: 20px;
-    background: rgba(212, 175, 55, 0.05);
+    background: rgba(0, 240, 255, 0.05);
     margin-bottom: 25px;
 }
 
@@ -1885,13 +1885,13 @@ body.simulation-active .reveal-init {
 }
 
 .pill-red:hover {
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 15px 40px rgba(239, 68, 68, 0.25), 0 0 0 1px rgba(239, 68, 68, 0.3);
-    background: rgba(30, 10, 10, 0.5);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 15px 40px rgba(255, 0, 127, 0.25), 0 0 0 1px rgba(255, 0, 127, 0.3);
+    background: rgba(40, 5, 20, 0.5);
 }
 
 .pill-blue:hover {
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 15px 40px rgba(14, 165, 233, 0.25), 0 0 0 1px rgba(14, 165, 233, 0.3);
-    background: rgba(10, 20, 35, 0.5);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 15px 40px rgba(0, 240, 255, 0.25), 0 0 0 1px rgba(0, 240, 255, 0.3);
+    background: rgba(5, 30, 40, 0.5);
 }
 
 /* The Pill Shape */
@@ -1906,14 +1906,14 @@ body.simulation-active .reveal-init {
 }
 
 .pill-red .pill-visual {
-    background: linear-gradient(to right, #ef4444 50%, #991b1b 50%);
-    filter: drop-shadow(0 0 8px rgba(239, 68, 68, 0.6));
+    background: linear-gradient(to right, #ff007f 50%, #800040 50%);
+    filter: drop-shadow(0 0 8px rgba(255, 0, 127, 0.6));
     animation-delay: 0s;
 }
 
 .pill-blue .pill-visual {
-    background: linear-gradient(to right, #0ea5e9 50%, #1e40af 50%);
-    filter: drop-shadow(0 0 8px rgba(14, 165, 233, 0.6));
+    background: linear-gradient(to right, #00f0ff 50%, #007a80 50%);
+    filter: drop-shadow(0 0 8px rgba(0, 240, 255, 0.6));
     animation-delay: 2s; /* Desynchronize float animation */
 }
 
@@ -1942,11 +1942,11 @@ body.simulation-active .reveal-init {
 }
 
 .pill-red:hover .pill-label {
-    text-shadow: 0 0 10px rgba(239, 68, 68, 0.6);
+    text-shadow: 0 0 10px rgba(255, 0, 127, 0.6);
 }
 
 .pill-blue:hover .pill-label {
-    text-shadow: 0 0 10px rgba(14, 165, 233, 0.6);
+    text-shadow: 0 0 10px rgba(0, 240, 255, 0.6);
 }
 
 .pill-desc {
@@ -2096,7 +2096,7 @@ body.simulation-active .reveal-init {
     text-transform: uppercase;
     z-index: 2;
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-    background: linear-gradient(135deg, #ffffff 0%, #d4af37 100%);
+    background: linear-gradient(135deg, #ffffff 0%, #00f0ff 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     line-height: 1.4;
@@ -2109,7 +2109,7 @@ body.simulation-active .reveal-init {
     left: -4px;
     right: -4px;
     bottom: -4px;
-    border: 2px solid rgba(239, 68, 68, 0.6);
+    border: 2px solid rgba(255, 0, 127, 0.6);
     border-radius: 50%;
     animation: pulseRingRed 2s cubic-bezier(0.215, 0.610, 0.355, 1) infinite;
     pointer-events: none;

@@ -1,5 +1,13 @@
 /* Modern Premium Dark Mode Design System for 'The State Tunnel' */
 
+@font-face {
+    font-family: 'Metro';
+    src: url('fonts/Metro.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
 :root {
     --bg-dark: #06060a;
     --bg-card: #0d0d16;
@@ -76,8 +84,7 @@ body::before {
 
 /* Typography */
 h1, h2, h3, h4 {
-    font-family: 'Montserrat', 'Metro', var(--font-sans);
-    font-family: var(--font-sans);
+    font-family: 'Metro', 'Montserrat', var(--font-sans);
     font-weight: 800;
     letter-spacing: -0.02em;
     line-height: 1.2;

@@ -4,7 +4,7 @@
 const STATES = {
     stress: {
         name: 'Стресс / Тревога',
-        color: '#00f0ff',
+        color: '#0ea5e9',
         carrierFreq: 150,
         beatFreq: 6, // 6 Hz Theta wave (deep relaxation)
         freqLabel: 'Тета-частота гармонизации (150Гц / 156Гц)',
@@ -13,7 +13,7 @@ const STATES = {
     },
     apathy: {
         name: 'Усталость / Апатия',
-        color: '#ff9e00',
+        color: '#f59e0b',
         carrierFreq: 150,
         beatFreq: 12, // 12 Hz Alpha wave (active alert/focus)
         freqLabel: 'Альфа-частота стимуляции (150Гц / 162Гц)',
@@ -22,7 +22,7 @@ const STATES = {
     },
     chaos: {
         name: 'Ментальный Хаос',
-        color: '#d946ef',
+        color: '#a855f7',
         carrierFreq: 150,
         beatFreq: 8, // 8 Hz Alpha wave (centering, anxiety relief)
         freqLabel: 'Альфа-частота балансировки (150Гц / 158Гц)',
@@ -301,7 +301,7 @@ function drawVisualizer() {
         ctx.stroke();
         
         // Second concentric ring
-        ctx.strokeStyle = 'rgba(0, 240, 255, 0.3)';
+        ctx.strokeStyle = 'rgba(212, 175, 55, 0.3)';
         ctx.beginPath();
         ctx.arc(centerX, centerY, radius * 0.7, 0, Math.PI * 2);
         ctx.stroke();
@@ -380,8 +380,8 @@ function drawChart() {
     chartCtx.lineTo(chartCanvas.width, chartCanvas.height);
     chartCtx.lineTo(0, chartCanvas.height);
     const fillGradient = chartCtx.createLinearGradient(0, 0, 0, chartCanvas.height);
-    fillGradient.addColorStop(0, 'rgba(0, 240, 255, 0.1)');
-    fillGradient.addColorStop(1, 'rgba(0, 240, 255, 0)');
+    fillGradient.addColorStop(0, 'rgba(212, 175, 55, 0.1)');
+    fillGradient.addColorStop(1, 'rgba(212, 175, 55, 0)');
     chartCtx.fillStyle = fillGradient;
     chartCtx.fill();
 }
@@ -499,8 +499,8 @@ if (matrixCanvas) {
         mDrops[x] = Math.random() * -100; // Staggered start positions
     }
 
-    let targetMatrixColor = { r: 57, g: 255, b: 20 }; // Default Matrix Green
-    let currentMatrixColor = { r: 57, g: 255, b: 20 };
+    let targetMatrixColor = { r: 16, g: 185, b: 129 }; // Default Matrix Green
+    let currentMatrixColor = { r: 16, g: 185, b: 129 };
 
     function lerp(start, end, amt) {
         return (1 - amt) * start + amt * end;
@@ -537,20 +537,20 @@ if (matrixCanvas) {
 
     if (redBtn && blueBtn) {
         redBtn.addEventListener('mouseenter', () => {
-            targetMatrixColor = { r: 255, g: 0, b: 127 }; // Neon Magenta
+            targetMatrixColor = { r: 239, g: 68, b: 68 }; // Neon Red
             matrixCanvas.style.opacity = '0.3';
         });
         redBtn.addEventListener('mouseleave', () => {
-            targetMatrixColor = { r: 57, g: 255, b: 20 }; // Restore Green
+            targetMatrixColor = { r: 16, g: 185, b: 129 }; // Restore Green
             matrixCanvas.style.opacity = '0.15';
         });
 
         blueBtn.addEventListener('mouseenter', () => {
-            targetMatrixColor = { r: 0, g: 240, b: 255 }; // Neon Cyan
+            targetMatrixColor = { r: 14, g: 165, b: 233 }; // Neon Blue
             matrixCanvas.style.opacity = '0.3';
         });
         blueBtn.addEventListener('mouseleave', () => {
-            targetMatrixColor = { r: 57, g: 255, b: 20 }; // Restore Green
+            targetMatrixColor = { r: 16, g: 185, b: 129 }; // Restore Green
             matrixCanvas.style.opacity = '0.15';
         });
     }
@@ -721,7 +721,7 @@ if (cityCanvas) {
             },
             {
                 name: 'Таганско-Краснопресненская (Фиолетовая)',
-                color: '#d946ef',
+                color: '#a855f7',
                 points: [
                     { x: centerX - cWidth * 0.35, y: centerY - cHeight * 0.28 },
                     { x: centerX - cWidth * 0.14, y: centerY - cHeight * 0.12 },
@@ -966,8 +966,8 @@ if (cityCanvas) {
             const isHovered = hoveredHub && hoveredHub.id === hub.id;
             const glowMul = isHovered ? 2.2 : 1.0;
             
-            cCtx.fillStyle = hub.isCore ? '#ff007f' : stateColor;
-            cCtx.shadowColor = hub.isCore ? '#ff007f' : stateColor;
+            cCtx.fillStyle = hub.isCore ? '#d4af37' : stateColor;
+            cCtx.shadowColor = hub.isCore ? '#d4af37' : stateColor;
             cCtx.shadowBlur = (9 + Math.sin(mapPulseOffset) * 4) * glowMul;
 
             cCtx.beginPath();
@@ -976,7 +976,7 @@ if (cityCanvas) {
             cCtx.fill();
             cCtx.shadowBlur = 0;
 
-            cCtx.strokeStyle = hub.isCore ? 'rgba(255, 0, 127, 0.4)' : (stateColor + '55');
+            cCtx.strokeStyle = hub.isCore ? 'rgba(212, 175, 55, 0.4)' : (stateColor + '55');
             cCtx.lineWidth = 1;
             cCtx.beginPath();
             cCtx.arc(hub.x, hub.y, r * (1.5 + Math.sin(mapPulseOffset * 1.1) * 0.3), 0, Math.PI * 2);

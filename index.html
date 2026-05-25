@@ -13,59 +13,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="scroll-locked">
-
-    <!-- Matrix Pill Selection Portal -->
-    <div id="matrix-portal" class="matrix-portal">
-        <canvas id="matrix-rain-canvas"></canvas>
-        
-        <!-- Step 1: Start Screen -->
-        <div id="matrix-start-screen" class="matrix-content start-screen-active" style="transition: opacity 0.5s ease;">
-            <div class="matrix-badge reveal-init stagger-1">Нейротуннель «Туннель Состояний»</div>
-            <h1 class="matrix-title reveal-init stagger-2" style="letter-spacing: 6px; font-size: clamp(24px, 4vw, 42px); margin-bottom: 50px;">СИМУЛЯЦИЯ ЗАПУЩЕНА</h1>
-            <div class="start-btn-container reveal-init stagger-3" style="margin-bottom: 40px;">
-                <button id="start-simulation-btn" class="pill-btn start-sim-btn">
-                    <div class="pulse-ring-red"></div>
-                    <span class="start-btn-text">НАЧАТЬ СИМУЛЯЦИЮ</span>
-                </button>
-            </div>
-            <div class="matrix-choice-hint reveal-init stagger-4" style="color: #64748b; font-size: 13px;">Интерактивный пространственный фильтр человека</div>
-        </div>
-
-        <!-- Step 2: Choice Screen (hidden initially) -->
-        <div id="matrix-choice-screen" class="matrix-content" style="display: none; opacity: 0; transition: opacity 0.8s ease;">
-            <div class="matrix-badge reveal-init stagger-1">Нейротуннель «Туннель Состояний»</div>
-            <h1 class="matrix-title reveal-init stagger-2">СДЕЛАЙ СВОЙ ВЫБОР</h1>
-            <p class="matrix-subtitle reveal-init stagger-3">Нажмите на одну из пилюль, чтобы запустить симуляцию и войти на платформу</p>
-            
-            <div class="pills-container reveal-init stagger-4">
-                <button class="pill-btn pill-red" id="pill-red-btn" data-state="stress">
-                    <div class="pill-visual"></div>
-                    <span class="pill-label">КРАСНАЯ ТАБЛЕТКА</span>
-                    <span class="pill-desc">Принять реальность (Шум / Стресс)</span>
-                </button>
-                
-                <button class="pill-btn pill-blue" id="pill-blue-btn" data-state="balance">
-                    <div class="pill-visual"></div>
-                    <span class="pill-label">СИНЯЯ ТАБЛЕТКА</span>
-                    <span class="pill-desc">Погрузиться в иллюзию (Покой / Баланс)</span>
-                </button>
-            </div>
-            
-            <div class="matrix-choice-hint reveal-init stagger-5">Ваш выбор определит начальную частоту и цвет пространства при входе</div>
-        </div>
-    </div>
-
-    <!-- Fullscreen Transit Video -->
-    <div id="intro-video-overlay" class="intro-video-overlay">
-        <video id="intro-video" muted playsinline preload="metadata">
-            <source src="images/walkthrough.mp4" type="video/mp4">
-        </video>
-        <button id="skip-intro-btn" class="skip-intro-btn">
-            <span>Пропустить интро</span>
-            <i class="fa-solid fa-arrow-right"></i>
-        </button>
-    </div>
+<body class="simulation-active">
 
     <!-- Background Ambient Glows -->
     <div class="ambient-glow" id="glow-1"></div>
@@ -98,7 +46,12 @@
             <div class="badge reveal-init stagger-2">Проект для акселератора #Нейрофест2026</div>
             <h1 class="hero-title reveal-init stagger-3">Пространственный фильтр человека</h1>
             <p class="hero-subtitle reveal-init stagger-4" style="max-width: 800px;">Это архитектурный свето-акустический шлюз, который мягко корректирует ваше психоэмоциональное состояние. Он использует свет, звук и биометрию, чтобы помочь вам обрести внутренний баланс.</p>
-            <div class="hero-actions reveal-init stagger-5">
+            
+            <div class="hero-image-container reveal-init stagger-5">
+                <img src="images/hero_bg.jpg" alt="Пространственный фильтр человека" class="hero-image">
+            </div>
+
+            <div class="hero-actions reveal-init stagger-6">
                 <a href="#simulator" class="btn btn-primary">Запустить симулятор</a>
                 <a href="#concept" class="btn btn-secondary">Подробнее о проекте</a>
             </div>

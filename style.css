@@ -342,6 +342,30 @@ a {
     display: flex;
     gap: 16px;
     flex-wrap: wrap;
+    justify-content: center;
+}
+
+.hero-image-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto 40px auto;
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 40px rgba(14, 165, 233, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+}
+
+.hero-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-image-container:hover .hero-image {
+    transform: scale(1.02);
 }
 
 .scroll-indicator {
@@ -393,6 +417,7 @@ body.simulation-active .reveal-init {
 .stagger-3 { animation-delay: 340ms; }
 .stagger-4 { animation-delay: 460ms; }
 .stagger-5 { animation-delay: 580ms; }
+.stagger-6 { animation-delay: 700ms; }
 
 /* Concept Section */
 .concept-section {

@@ -2252,3 +2252,40 @@ body.simulation-active .reveal-init {
         grid-template-columns: 1fr;
     }
 }
+
+/* Ecosystem Key Visual */
+.ecosystem-hero-image-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 30px auto 45px auto;
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 30px rgba(14, 165, 233, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.ecosystem-hero-image {
+    width: 100%;
+    height: auto;
+    max-height: 480px;
+    display: block;
+    object-fit: cover;
+    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ecosystem-hero-image-container:hover .ecosystem-hero-image {
+    transform: scale(1.015);
+}
+
+/* Custom styles for active simulator pills */
+.btn-state.active.pill-red {
+    border-color: #ef4444 !important;
+    color: #ef4444 !important;
+    background-color: rgba(239, 68, 68, 0.12) !important;
+}
+
+.btn-state.active.pill-blue {
+    border-color: #0ea5e9 !important;
+    color: #0ea5e9 !important;
+    background-color: rgba(14, 165, 233, 0.12) !important;
+}

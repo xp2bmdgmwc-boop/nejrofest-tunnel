@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Нейротуннель «Туннель Состояний» | Адаптивная свето-акустическая инсталляция</title>
-    <meta name="description" content="Интерактивный пространственный фильтр для учреждений культуры от Валерия Латыпова и Алёны Левицкой. Проект Нейрофест 2026.">
+    <title>Нейротуннель. Туннель Состояний | Проект для Нейрофест 2026</title>
+    <meta name="description" content="Адаптивная свето-акустическая среда для учреждений культуры. Бесконтактное считывание состояния посетителя через rPPG. Проект Нейрофест 2026. Авторы: Валерий Латыпов, Алёна Левицкая (АБ Структура).">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -106,6 +106,10 @@
             <h2 class="section-title text-center">Единая экосистема: Мост & ГЭС-2</h2>
             <p class="lead text-center max-w-3xl">Мост у ГЭС-2 работает как эмоциональный завлекающий портал, который бесшовно перетекает в масштабную внутреннюю экспозицию.</p>
             
+            <div class="ecosystem-hero-image-container reveal-init stagger-3">
+                <img src="images/bridge_tunnel.png" alt="Единая экосистема: Мост и ГЭС-2" class="ecosystem-hero-image">
+            </div>
+            
             <div class="ecosystem-grid">
                 <!-- Portal Card -->
                 <div class="ecosystem-card">
@@ -180,8 +184,19 @@
                 <!-- Controls & Artifact Output -->
                 <div class="sim-sidebar">
                     <div class="sim-card">
-                        <h3>1. Сделайте замер</h3>
-                        <p class="card-desc">Выберите доминирующее состояние для симуляции датчиков входа:</p>
+                        <h3>1. Режим запуска</h3>
+                        
+                        <p class="card-desc" style="margin-bottom: 8px;">Интуитивный выбор состояния:</p>
+                        <div class="pills-selector-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px;">
+                            <button class="btn-state pill-btn-state pill-red" data-state="stress" style="flex-direction: row; justify-content: center; gap: 8px; border: 1px solid rgba(239, 68, 68, 0.25); background: rgba(239, 68, 68, 0.04); color: #ef4444; font-family: var(--font-mono); font-size: 0.75rem; padding: 12px 10px;">
+                                <i class="fa-solid fa-capsules" style="font-size: 1rem;"></i> КРАСНАЯ ТАБЛЕТКА
+                            </button>
+                            <button class="btn-state pill-btn-state pill-blue" data-state="balance" style="flex-direction: row; justify-content: center; gap: 8px; border: 1px solid rgba(14, 165, 233, 0.25); background: rgba(14, 165, 233, 0.04); color: #0ea5e9; font-family: var(--font-mono); font-size: 0.75rem; padding: 12px 10px;">
+                                <i class="fa-solid fa-capsules" style="font-size: 1rem;"></i> СИНЯЯ ТАБЛЕТКА
+                            </button>
+                        </div>
+
+                        <p class="card-desc" style="margin-bottom: 8px;">Точная калибровка (ручной выбор):</p>
                         <div class="state-buttons">
                             <button class="btn-state active" data-state="stress" data-color="#1e3a8a" data-freq-diff="6">
                                 <i class="fa-solid fa-bolt"></i> Стресс / Тревога
@@ -335,8 +350,8 @@
                     <div class="usp-item" style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center;">
                         <div class="usp-icon"><i class="fa-solid fa-people-group"></i></div>
                         <div class="usp-content">
-                            <h4>3. Социальная синестезия (Ауры в толпе)</h4>
-                            <p>При массовом проходе система проецирует индивидуальные световые ауры вокруг каждого человека. При встрече или сближении цвета аур плавно смешиваются, исключая какофонию и создавая визуальный диалог.</p>
+                            <h4>3. Индивидуальный свет в групповом проходе</h4>
+                            <p>При массовом проходе система проецирует индивидуальные световые контуры вокруг каждого посетителя, которые синхронизируются с его персональной частотой. При встрече или сближении цвета аур плавно смешиваются, исключая какофонию и создавая визуальный диалог.</p>
                         </div>
                     </div>
 
@@ -432,7 +447,7 @@
                         <h3>Валерий Латыпов</h3>
                         <span class="author-title">Визуальный художник & Физик (НИЯУ МИФИ)</span>
                     </div>
-                    <p class="author-bio">Инженер-физик по образованию (квантовая радиофизика МИФИ), Валерий более 20 лет работает на стыке науки, музыки и визуального искусства. Спикер TEDx, автор персональных выставок, официальный фотограф Dubai Opera и фестивалей WOMAD Питера Гэбриэла. В проекте отвечает за визуальную физику света, звуковые ритмы и математическое моделирование балансирующих состояний. Его работы и интервью публиковались в Forbes и Rolling Stone, а также он сотрудничал с группой Depeche Mode.</p>
+                    <p class="author-bio">Инженер-физик по образованию (квантовая радиофизика, НИЯУ МИФИ, 2006). Более 20 лет работает на стыке физики, визуального искусства и звука. Спикер TEDx (2018, концепция 'Алхимический портрет'). Член Союза фотохудожников России с 2021 года. Официальный фотограф Dubai Opera (Carmina Burana, 2025). Постоянная коллекция Музея искусств Neka (Убуд, Бали). В проекте отвечает за технологическое видение, постановку задачи перед техническими подрядчиками, генеративную визуальную концепцию и художественную часть.</p>
                     <div class="author-links">
                         <a href="http://www.valerylatypov.com" target="_blank"><i class="fa-solid fa-globe"></i> valerylatypov.com</a>
                     </div>

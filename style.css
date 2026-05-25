@@ -1311,7 +1311,9 @@ body.simulation-active .reveal-init {
 }
 
 .scale-info h3 {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
     margin-bottom: 15px;
     color: var(--text-primary);
 }

@@ -1,41 +1,142 @@
-// State Tunnel Interactive Simulator and Audio Engine
+// 1. LOCALIZATION SYSTEM
+const isEn = document.documentElement.lang === 'en';
+
+const LOC = {
+    ru: {
+        states: {
+            stress: {
+                name: 'Стресс / Тревога',
+                freqLabel: 'Тета-частота гармонизации (150Гц / 156Гц)',
+                desc: 'Гармонизация тета-волнами (6 Гц разница). Нейродинамический баланс восстановлен на 94%.'
+            },
+            apathy: {
+                name: 'Усталость / Апатия',
+                freqLabel: 'Альфа-частота стимуляции (150Гц / 162Гц)',
+                desc: 'Стимуляция альфа-активности (12 Гц разница). Когнитивный тонус повышен на 88%.'
+            },
+            chaos: {
+                name: 'Ментальный Хаос',
+                freqLabel: 'Альфа-частота балансировки (150Гц / 158Гц)',
+                desc: 'Центрирование полушарий (8 Гц разница). Ментальный шум снижен на 91%.'
+            },
+            balance: {
+                name: 'Баланс / Покой',
+                freqLabel: 'Опорный заземляющий тон (150Гц)',
+                desc: 'Идеальный баланс достигнут. Выход из шлюза. Пространственная адаптация 100%.'
+            }
+        },
+        audioPlay: 'Включить звук (Частота баланса)',
+        audioStop: 'Выключить звук',
+        metro: {
+            sokol: 'Сокольническая (Красная)',
+            zamos: 'Замоскворецкая (Зеленая)',
+            koltso: 'Кольцевая (Коричневая)',
+            tagan: 'Таганско-Краснопресненская (Фиолетовая)'
+        },
+        nodes: {
+            ges2: 'ГЭС-2 / Патриарший мост',
+            city: 'Москва-Сити',
+            zaryadye: 'Зарядье / Парящий мост',
+            krymsky: 'Крымский мост / Парк Культуры',
+            belorusskaya: 'Белорусский узел',
+            taganskaya: 'Таганский узел'
+        },
+        status: {
+            sync: 'СИНХРОНИЗАЦИЯ: 100%',
+            stress: 'ШУМ: ВЫСОКИЙ (СБРОС)',
+            apathy: 'ТОНУС: НИЗКИЙ (АКТИВАЦИЯ)',
+            chaos: 'ШУМ: 91% (БАЛАНСИРОВКА)',
+            balance: 'СОСТОЯНИЕ: ИДЕАЛЬНОЕ'
+        }
+    },
+    en: {
+        states: {
+            stress: {
+                name: 'Stress / Anxiety',
+                freqLabel: 'Theta frequency of harmonization (150Hz / 156Hz)',
+                desc: 'Harmonization by theta waves (6 Hz difference). Neurodynamic balance restored to 94%.'
+            },
+            apathy: {
+                name: 'Fatigue / Apathy',
+                freqLabel: 'Alpha frequency of stimulation (150Hz / 162Hz)',
+                desc: 'Stimulation of alpha activity (12 Hz difference). Cognitive tone increased by 88%.'
+            },
+            chaos: {
+                name: 'Mental Chaos',
+                freqLabel: 'Alpha frequency of balancing (150Hz / 158Hz)',
+                desc: 'Centering of hemispheres (8 Hz difference). Mental noise reduced by 91%.'
+            },
+            balance: {
+                name: 'Balance / Peace',
+                freqLabel: 'Grounding reference tone (150Hz)',
+                desc: 'Perfect balance achieved. Exit from the gateway. Spatial adaptation 100%.'
+            }
+        },
+        audioPlay: 'Turn on sound (Balance frequency)',
+        audioStop: 'Turn off sound',
+        metro: {
+            sokol: 'Sokolnicheskaya (Red)',
+            zamos: 'Zamoskvoretskaya (Green)',
+            koltso: 'Koltsevaya (Brown)',
+            tagan: 'Tagansko-Krasnopresnenskaya (Purple)'
+        },
+        nodes: {
+            ges2: 'GES-2 / Patriarchal Bridge',
+            city: 'Moscow-City',
+            zaryadye: 'Zaryadye / Floating Bridge',
+            krymsky: 'Krymsky Bridge / Gorky Park',
+            belorusskaya: 'Belorusskaya Interchange',
+            taganskaya: 'Taganskaya Interchange'
+        },
+        status: {
+            sync: 'SYNCHRONIZATION: 100%',
+            stress: 'NOISE: HIGH (RESET)',
+            apathy: 'TONE: LOW (ACTIVATION)',
+            chaos: 'NOISE: 91% (BALANCING)',
+            balance: 'STATE: PERFECT'
+        }
+    }
+};
+
+const lang = isEn ? 'en' : 'ru';
+const t = LOC[lang];
 
 // 1. STATE DEFINITIONS
 const STATES = {
     stress: {
-        name: 'Стресс / Тревога',
+        name: t.states.stress.name,
         color: '#0ea5e9',
         carrierFreq: 150,
         beatFreq: 6, // 6 Hz Theta wave (deep relaxation)
-        freqLabel: 'Тета-частота гармонизации (150Гц / 156Гц)',
-        desc: 'Гармонизация тета-волнами (6 Гц разница). Нейродинамический баланс восстановлен на 94%.',
+        freqLabel: t.states.stress.freqLabel,
+        desc: t.states.stress.desc,
         visualMode: 'stress'
     },
     apathy: {
-        name: 'Усталость / Апатия',
+        name: t.states.apathy.name,
         color: '#f59e0b',
         carrierFreq: 150,
         beatFreq: 12, // 12 Hz Alpha wave (active alert/focus)
-        freqLabel: 'Альфа-частота стимуляции (150Гц / 162Гц)',
-        desc: 'Стимуляция альфа-активности (12 Гц разница). Когнитивный тонус повышен на 88%.',
+        freqLabel: t.states.apathy.freqLabel,
+        desc: t.states.apathy.desc,
         visualMode: 'apathy'
     },
     chaos: {
-        name: 'Ментальный Хаос',
+        name: t.states.chaos.name,
         color: '#a855f7',
         carrierFreq: 150,
         beatFreq: 8, // 8 Hz Alpha wave (centering, anxiety relief)
-        freqLabel: 'Альфа-частота балансировки (150Гц / 158Гц)',
-        desc: 'Центрирование полушарий (8 Гц разница). Ментальный шум снижен на 91%.',
+        freqLabel: t.states.chaos.freqLabel,
+        desc: t.states.chaos.desc,
         visualMode: 'chaos'
     },
     balance: {
-        name: 'Баланс / Покой',
+        name: t.states.balance.name,
         color: '#ffffff',
         carrierFreq: 150,
         beatFreq: 0, // Grounding pure single tone (no binaural beat)
-        freqLabel: 'Опорный заземляющий тон (150Гц)',
-        desc: 'Идеальный баланс достигнут. Выход из шлюза. Пространственная адаптация 100%.',
+        freqLabel: t.states.balance.freqLabel,
+        desc: t.states.balance.desc,
         visualMode: 'balance'
     }
 };
@@ -122,7 +223,7 @@ function toggleAudio() {
         masterGain.gain.setTargetAtTime(0, audioCtx.currentTime, 0.15);
         isAudioPlaying = false;
         icon.className = 'fa-solid fa-volume-xmark';
-        span.textContent = 'Включить звук (Частота баланса)';
+        span.textContent = t.audioPlay;
         audioBtn.classList.remove('playing');
     } else {
         // Resume context if suspended (browser security)
@@ -133,7 +234,7 @@ function toggleAudio() {
         masterGain.gain.setTargetAtTime(0.15, audioCtx.currentTime, 0.15);
         isAudioPlaying = true;
         icon.className = 'fa-solid fa-volume-high';
-        span.textContent = 'Выключить звук';
+        span.textContent = t.audioStop;
         audioBtn.classList.add('playing');
         
         updateAudioFrequencies();
@@ -689,7 +790,7 @@ if (cityCanvas) {
     const getMetroLines = (centerX, centerY) => {
         return [
             {
-                name: 'Сокольническая (Красная)',
+                name: t.metro.sokol,
                 color: '#ef4444',
                 points: [
                     { x: centerX - cWidth * 0.38, y: centerY + cHeight * 0.38 },
@@ -700,7 +801,7 @@ if (cityCanvas) {
                 ]
             },
             {
-                name: 'Замоскворецкая (Зеленая)',
+                name: t.metro.zamos,
                 color: '#10b981',
                 points: [
                     { x: centerX - cWidth * 0.22, y: centerY - cHeight * 0.4 },
@@ -711,7 +812,7 @@ if (cityCanvas) {
                 ]
             },
             {
-                name: 'Кольцевая (Коричневая)',
+                name: t.metro.koltso,
                 color: '#8b5a2b',
                 isRing: true,
                 radiusX: cWidth * 0.14,
@@ -720,7 +821,7 @@ if (cityCanvas) {
                 centerY: centerY
             },
             {
-                name: 'Таганско-Краснопресненская (Фиолетовая)',
+                name: t.metro.tagan,
                 color: '#a855f7',
                 points: [
                     { x: centerX - cWidth * 0.35, y: centerY - cHeight * 0.28 },
@@ -735,12 +836,12 @@ if (cityCanvas) {
     // City Nodes (Bridges, City towers, hubs)
     const getHubNodes = (centerX, centerY) => {
         return [
-            { id: 'ges2', name: 'ГЭС-2 / Патриарший мост', x: centerX + cWidth * 0.01, y: centerY + cHeight * 0.08, pulseSize: 8, isCore: true },
-            { id: 'city', name: 'Москва-Сити', x: centerX - cWidth * 0.26, y: centerY + cHeight * 0.02, pulseSize: 6, isCore: false },
-            { id: 'zaryadye', name: 'Зарядье / Парящий мост', x: centerX + cWidth * 0.13, y: centerY + cHeight * 0.04, pulseSize: 5, isCore: false },
-            { id: 'krymsky', name: 'Крымский мост / Парк Культуры', x: centerX - cWidth * 0.08, y: centerY + cHeight * 0.17, pulseSize: 5, isCore: false },
-            { id: 'belorusskaya', name: 'Белорусский узел', x: centerX - cWidth * 0.12, y: centerY - cHeight * 0.22, pulseSize: 4, isCore: false },
-            { id: 'taganskaya', name: 'Таганский узел', x: centerX + cWidth * 0.16, y: centerY + cHeight * 0.18, pulseSize: 4, isCore: false }
+            { id: 'ges2', name: t.nodes.ges2, x: centerX + cWidth * 0.01, y: centerY + cHeight * 0.08, pulseSize: 8, isCore: true },
+            { id: 'city', name: t.nodes.city, x: centerX - cWidth * 0.26, y: centerY + cHeight * 0.02, pulseSize: 6, isCore: false },
+            { id: 'zaryadye', name: t.nodes.zaryadye, x: centerX + cWidth * 0.13, y: centerY + cHeight * 0.04, pulseSize: 5, isCore: false },
+            { id: 'krymsky', name: t.nodes.krymsky, x: centerX - cWidth * 0.08, y: centerY + cHeight * 0.17, pulseSize: 5, isCore: false },
+            { id: 'belorusskaya', name: t.nodes.belorusskaya, x: centerX - cWidth * 0.12, y: centerY - cHeight * 0.22, pulseSize: 4, isCore: false },
+            { id: 'taganskaya', name: t.nodes.taganskaya, x: centerX + cWidth * 0.16, y: centerY + cHeight * 0.18, pulseSize: 4, isCore: false }
         ];
     };
 
@@ -991,11 +1092,11 @@ if (cityCanvas) {
             if (isHovered) {
                 cCtx.fillStyle = '#94a3b8';
                 cCtx.font = '8.5px monospace';
-                let statusText = 'СИНХРОНИЗАЦИЯ: 100%';
-                if (activeStateKey === 'stress') statusText = 'ШУМ: ВЫСОКИЙ (СБРОС)';
-                else if (activeStateKey === 'apathy') statusText = 'ТОНУС: НИЗКИЙ (АКТИВАЦИЯ)';
-                else if (activeStateKey === 'chaos') statusText = 'ШУМ: 91% (БАЛАНСИРОВКА)';
-                else if (activeStateKey === 'balance') statusText = 'СОСТОЯНИЕ: ИДЕАЛЬНОЕ';
+                let statusText = t.status.sync;
+                if (activeStateKey === 'stress') statusText = t.status.stress;
+                else if (activeStateKey === 'apathy') statusText = t.status.apathy;
+                else if (activeStateKey === 'chaos') statusText = t.status.chaos;
+                else if (activeStateKey === 'balance') statusText = t.status.balance;
                 cCtx.fillText(statusText, hub.x, hub.y + r + 13);
             }
         });

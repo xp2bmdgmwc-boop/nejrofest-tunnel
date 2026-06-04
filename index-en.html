@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neurotunnel. The State Tunnel | Project for Neurofest 2026</title>
+    <meta name="description" content="Adaptive light-acoustic environment for cultural institutions. Contactless reading of the visitor's state via rPPG. Project for Neurofest 2026. Authors: Valery Latypov, Alena Levitskaya (AB Structure).">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&family=Outfit:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="simulation-active">
+
+    <!-- Background Ambient Glows -->
+    <div class="ambient-glow" id="glow-1"></div>
+    <div class="ambient-glow" id="glow-2"></div>
+
+    <!-- Navigation -->
+    <header class="header reveal-init stagger-1">
+        <div class="logo">
+            <span class="logo-main">THE STATE TUNNEL</span>
+            <span class="logo-sub">NEUROTUNNEL "THE STATE TUNNEL"</span>
+        </div>
+        <nav class="nav">
+            <a href="#concept">Concept</a>
+            <a href="#simulator">Simulator</a>
+            <a href="#scales">Formats</a>
+            <a href="#city-network">Bridge Network</a>
+            <a href="#innovation">Uniqueness</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#team">Authors</a>
+            <a href="#tech">Specs</a>
+        </nav>
+        <div class="cta-header">
+            <a href="index.html" class="lang-toggle-link">RU</a>
+            <a href="#simulator" class="btn btn-outline">Start Session</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content" style="text-align: center; display: flex; flex-direction: column; align-items: center; margin: 0 auto;">
+            <div class="badge reveal-init stagger-2">Project for Accelerator #Neurofest2026</div>
+            <h1 class="hero-title reveal-init stagger-3">Human Spatial Filter</h1>
+            <p class="hero-subtitle reveal-init stagger-4" style="max-width: 800px;">An architectural light and acoustic gateway that gently corrects your psychoemotional state. It uses light, sound, and biometrics to help you find your inner balance.</p>
+            <div class="hero-actions reveal-init stagger-5">
+                <a href="#simulator" class="btn btn-primary">Launch Simulator</a>
+                <a href="#concept" class="btn btn-secondary">About the Project</a>
+            </div>
+        </div>
+        <div class="hero-bg-visual">
+            <div class="tunnel-mesh"></div>
+        </div>
+        <div class="scroll-indicator">
+            <span>Scroll down</span>
+            <i class="fa-solid fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- Philosophy / Concept Section -->
+    <section id="concept" class="section concept-section">
+        <div class="container">
+            <div class="grid grid-2">
+                <div class="concept-text">
+                    <h2 class="section-title">Philosophy</h2>
+                    <p class="quote">“Don't run. Soon everything will end”</p>
+                    <p class="lead">A modern person lives in a state of constant information noise. Arriving at a museum, theater, or library, they bring this noise with them. Their attention is scattered, their brain is overloaded.</p>
+                    <p><strong>Neurotunnel "The State Tunnel"</strong> is designed in the style of <strong>Emotech (Emotional Tech)</strong> — emotionally-active architecture that reacts to a person's state. Combining biomorphic structures or the geometry of a <strong>rectangular prism</strong> by Alena Levitskaya (AB "STRUCTURE") and physical algorithms by Valery Latypov, we have created an adaptive filter.</p>
+                    <p>The space reads the biometrics of the entering person and guides them through a metaphorical "life cycle" — from the sensory silence of "birth", through the light-acoustic experience of interacting with the space, to "symbolic death" (a visual reset with white light) and final rebirth in a state of pure balance and peace.</p>
+                </div>
+                <div class="concept-visual">
+                    <div class="img-wrapper">
+                        <img src="images/entrance.jpg" alt="Entrance to the state tunnel">
+                        <div class="img-caption">Entrance portal and state scanning console</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Walkthrough Section -->
+    <section id="walkthrough-video" class="section video-section">
+        <div class="container">
+            <div class="text-center max-w-3xl">
+                <h2 class="section-title">Video Walkthrough</h2>
+                <p class="lead">3D visualization of the immersive passage and the integration of the object into the urban environment of Moscow.</p>
+            </div>
+            <div class="video-container-wrapper">
+                <div class="video-glow-effect"></div>
+                <div class="video-wrapper-inner">
+                    <video id="concept-video" autoplay loop muted playsinline controls preload="metadata">
+                        <source src="images/walkthrough.mp4" type="video/mp4">
+                        Your browser does not support embedded videos.
+                    </video>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Exhibition & Journey Ecosystem Section -->
+    <section id="ecosystem" class="section ecosystem-section">
+        <div class="container">
+            <h2 class="section-title text-center">Unified Ecosystem: Bridge & GES-2</h2>
+            <p class="lead text-center max-w-3xl">The bridge near GES-2 works as an emotional enticing portal that seamlessly flows into a large-scale indoor exhibition.</p>
+            
+            <div class="ecosystem-hero-image-container reveal-init stagger-3">
+                <img src="images/bridge_tunnel.png" alt="Unified Ecosystem: Bridge and GES-2" class="ecosystem-hero-image">
+            </div>
+            
+            <div class="ecosystem-grid">
+                <!-- Portal Card -->
+                <div class="ecosystem-card">
+                    <div class="card-icon"><i class="fa-solid fa-bridge"></i></div>
+                    <h3>1. Bridge as a City Portal</h3>
+                    <p class="card-desc">An entry point and first filter of attention. Crossing the river, the visitor is drawn into a play of light, sensors smoothly read biometrics, preparing them for deep immersion. This is a showcase of the exhibition, visible from all embankments.</p>
+                </div>
+
+                <!-- Underground Card -->
+                <div class="ecosystem-card highlight">
+                    <div class="card-icon"><i class="fa-solid fa-layer-group"></i></div>
+                    <h3>2. Exhibition on GES-2 Level -1</h3>
+                    <p class="card-desc"><strong>Primary space.</strong> The dark underground halls of GES-2 represent the ideal location for the installation. The visitor descends into silence and semi-darkness, where they pass through a 20-meter individual state tunnel, finishing the journey in the room of catharsis.</p>
+                </div>
+
+                <!-- Main Nave Card -->
+                <div class="ecosystem-card">
+                    <div class="card-icon"><i class="fa-solid fa-monument"></i></div>
+                    <h3>3. Alternative: Central Nave</h3>
+                    <p class="card-desc"><strong>Monumental dominant.</strong> Placing a massive parametric tunnel in the main avenue (atrium) of GES-2. The giant object made of white biomorphic ribs becomes the central sculpture, reacting to the collective state of people in the building.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Simulator Section -->
+    <section id="simulator" class="section simulator-section">
+        <div class="container">
+            <div class="text-center max-w-3xl">
+                <h2 class="section-title">Interactive Simulator</h2>
+                <p class="lead">Feel how the space works. Choose your current state below and turn on the sound to listen to the harmonizing frequency.</p>
+            </div>
+
+            <div class="simulator-container">
+                <!-- Visual Canvas Screen -->
+                <div class="sim-screen" id="sim-screen">
+                    <canvas id="visual-canvas"></canvas>
+                    
+                    <!-- Hardware overlays -->
+                    <div class="live-indicator">
+                        <span class="live-dot"></span>
+                        <span class="live-text">REC // LIVE_READOUT</span>
+                    </div>
+                    <div class="session-indicator">
+                        [SESSION: ACTIVE]
+                    </div>
+                    
+                    <div class="screen-overlay">
+                        <div class="state-indicator">
+                            <span class="label">Current State:</span>
+                            <span class="value" id="current-state-val">Stress / Anxiety</span>
+                        </div>
+                        <div class="frequency-indicator">
+                            <i class="fa-solid fa-wave-square"></i>
+                            <span id="frequency-val">Theta Frequency (150Hz / 156Hz)</span>
+                        </div>
+                    </div>
+                    
+                    <div class="telemetry-overlay">
+                        <div class="telemetry-item"><span class="t-label">rPPG Quality:</span> <span id="telemetry-rppg" class="t-val">96%</span></div>
+                        <div class="telemetry-item"><span class="t-label">HR Sensor:</span> <span id="telemetry-hr" class="t-val">115 bpm</span></div>
+                        <div class="telemetry-item"><span class="t-label">Phase Shift:</span> <span id="telemetry-phase" class="t-val">6Hz</span></div>
+                    </div>
+                    
+                    <!-- Audio Control Overlay -->
+                    <button class="audio-toggle" id="audio-toggle" title="Turn on/off sound">
+                        <i class="fa-solid fa-volume-xmark"></i>
+                        <span>Turn on sound (Balance frequency)</span>
+                    </button>
+                </div>
+
+                <!-- Controls & Artifact Output -->
+                <div class="sim-sidebar">
+                    <div class="sim-card">
+                        <h3>1. Launch Mode</h3>
+                        
+                        <p class="card-desc" style="margin-bottom: 8px;">Intuitive state selection:</p>
+                        <div class="pills-selector-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px;">
+                            <button class="btn-state pill-btn-state pill-red" data-state="stress" style="flex-direction: row; justify-content: center; gap: 8px; border: 1px solid rgba(239, 68, 68, 0.25); background: rgba(239, 68, 68, 0.04); color: #ef4444; font-family: var(--font-mono); font-size: 0.75rem; padding: 12px 10px;">
+                                <i class="fa-solid fa-capsules" style="font-size: 1rem;"></i> RED PILL
+                            </button>
+                            <button class="btn-state pill-btn-state pill-blue" data-state="balance" style="flex-direction: row; justify-content: center; gap: 8px; border: 1px solid rgba(14, 165, 233, 0.25); background: rgba(14, 165, 233, 0.04); color: #0ea5e9; font-family: var(--font-mono); font-size: 0.75rem; padding: 12px 10px;">
+                                <i class="fa-solid fa-capsules" style="font-size: 1rem;"></i> BLUE PILL
+                            </button>
+                        </div>
+
+                        <p class="card-desc" style="margin-bottom: 8px;">Precise calibration (manual selection):</p>
+                        <div class="state-buttons">
+                            <button class="btn-state active" data-state="stress" data-color="#1e3a8a" data-freq-diff="6">
+                                <i class="fa-solid fa-bolt"></i> Stress / Anxiety
+                            </button>
+                            <button class="btn-state" data-state="apathy" data-color="#b45309" data-freq-diff="12">
+                                <i class="fa-solid fa-battery-empty"></i> Fatigue / Apathy
+                            </button>
+                            <button class="btn-state" data-state="chaos" data-color="#6b21a8" data-freq-diff="8">
+                                <i class="fa-solid fa-wind"></i> Mental Chaos
+                            </button>
+                            <button class="btn-state" data-state="balance" data-color="#ffffff" data-freq-diff="0">
+                                <i class="fa-solid fa-circle-check"></i> Balance / Peace
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="sim-card card-souvenir">
+                        <h3>2. Your Digital Souvenir</h3>
+                        <p class="card-desc">Generation of a personal video postcard and rhythm map at the exit:</p>
+                        <div class="souvenir-preview">
+                            <div class="souvenir-mock" id="souvenir-visual">
+                                <div class="pulse-ring"></div>
+                                <canvas id="chart-canvas" width="200" height="80"></canvas>
+                            </div>
+                            <div class="souvenir-info">
+                                <span class="badge-mini">Unique ID: ST-2026-992</span>
+                                <h4>Transition Map</h4>
+                                <p id="souvenir-desc">Harmonization by theta waves (6 Hz difference). Neurodynamic balance restored to 94%.</p>
+                                <button class="btn btn-primary btn-sm" id="btn-download-souvenir">
+                                    <i class="fa-solid fa-qrcode"></i> Get QR Code
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- User Journey -->
+    <section class="section journey-section">
+        <div class="container">
+            <h2 class="section-title text-center">Visitor Journey inside the Tunnel</h2>
+            <div class="journey-steps">
+                <div class="step-card">
+                    <div class="step-num">01</div>
+                    <h3>Entry & Scanning</h3>
+                    <p>Biometric sensors and contactless pulse scanning determine the dominant frequency of your state.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">02</div>
+                    <h3>Light-Acoustic Cocoon</h3>
+                    <p>Walls, floor, and ceiling generate light waves and acoustic background, compensating for the imbalance of body systems.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">03</div>
+                    <h3>White Cleansing</h3>
+                    <p>At the end of the corridor, all patterns transition to pure white light, resetting visual perception.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">04</div>
+                    <h3>Digital Footprint</h3>
+                    <p>You receive a video recording of your unique light path and a state map directly to your smartphone.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scale & Deployment Options -->
+    <section id="scales" class="section scales-section">
+        <div class="container">
+            <h2 class="section-title text-center">Implementation Formats</h2>
+            <p class="lead text-center max-w-3xl">The project adapts to any scale — from local interior B2B modules to major architectural solutions integrated into the GES-2 infrastructure.</p>
+            <div class="scales-grid">
+                <!-- Scale 1: Modular B2B Tunnel -->
+                <div class="scale-card">
+                    <div class="img-wrapper scale-img">
+                        <img src="images/pov_inside.png" alt="Modular B2B tunnel">
+                        <div class="scale-badge">Chamber format</div>
+                    </div>
+                    <div class="scale-info">
+                        <h3>Chamber format</h3>
+                        <p>A compact light and acoustic gateway, ideal for integration into the interiors of cultural institutions, offices, or art spaces. Cosy atmosphere and quick assembly.</p>
+                        <ul class="scale-specs">
+                            <li><strong>Assembly:</strong> 2 days</li>
+                            <li><strong>Dimensions:</strong> 10 × 2.5 × 3 m</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Scale 2: Ecosystem Bridge + GES-2 -->
+                <div class="scale-card">
+                    <div class="img-wrapper scale-img">
+                        <img src="images/bridge_vault.png" alt="Unified Ecosystem: Bridge and GES-2">
+                        <div class="scale-badge">Urbanism</div>
+                    </div>
+                    <div class="scale-info">
+                        <h3>Unified Ecosystem (Bridge & GES-2)</h3>
+                        <p>One of the main deployment options. The bridge acts as an enticing urban portal, while the main exhibition unfolds inside the spaces of GES-2, creating a single route.</p>
+                        <ul class="scale-specs">
+                            <li><strong>Format:</strong> External Portal + Indoor Exhibition</li>
+                            <li><strong>Throughput:</strong> High</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Scale 3: Parametric Bridge Tunnel -->
+                <div class="scale-card">
+                    <div class="img-wrapper scale-img">
+                        <img src="images/bridge_tunnel.png" alt="Parametric bridge-tunnel">
+                        <div class="scale-badge">Bionics</div>
+                    </div>
+                    <div class="scale-info">
+                        <h3>Parametric bridge-tunnel</h3>
+                        <p>A futuristic pedestrian bridge-gallery designed in the smooth biomorphic style of Zaha Hadid. Aerodynamic curves made of white polymer, seamless glazing, and an immersive adaptive tunnel inside.</p>
+                        <ul class="scale-specs">
+                            <li><strong>Architecture:</strong> Parametric fluid forms</li>
+                            <li><strong>Lighting:</strong> LED lines integrated into the ribs</li>
+                            <li><strong>Throughput:</strong> up to 2500 people/hour</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Uniqueness & Innovation -->
+    <section id="innovation" class="section innovation-section">
+        <div class="container">
+            <h2 class="section-title text-center">Uniqueness and Innovation</h2>
+            <div class="grid grid-2 align-stretch" style="align-items: stretch;">
+                <div class="innovation-text">
+                    <h3>Why are there no analogues in the world?</h3>
+                    <p class="lead" style="text-align: center; max-width: 1000px; margin: 0 auto 40px auto;">Existing light and neuro-installations (such as Nick Verstand's 'Aura' or Ivo Peitzner's 'Tunnel of Sentient Light') operate purely as passive mirrors — they only read and visualize the user's current biorhythms and stress.</p>
+                    
+                    <div class="usp-item" style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                        <div class="usp-icon"><i class="fa-solid fa-arrows-spin"></i></div>
+                        <div class="usp-content">
+                            <h4>1. Active Compensation (Bioregulation)</h4>
+                            <p>The Neurotunnel operates as an <strong>active balancer</strong>. Algorithms do not just show your anxiety, but create a compensating effect: if you are stressed, the system selects calming sound frequencies (theta rhythms 4–7 Hz) and cold blue light. For apathy — an energizing gold spectrum and beta rhythms.</p>
+                        </div>
+                    </div>
+
+                    <div class="usp-item" style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                        <div class="usp-icon"><i class="fa-solid fa-eye"></i></div>
+                        <div class="usp-content">
+                            <h4>2. Fully Contactless</h4>
+                            <p>Instead of uncomfortable EEG helmets or physical sensors, data reading happens on the go. Cameras track the micro-pulsations of facial vessels (rPPG) and facial expressions (Face Mesh) without hindering the person's movement.</p>
+                        </div>
+                    </div>
+
+                    <div class="usp-item" style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                        <div class="usp-icon"><i class="fa-solid fa-people-group"></i></div>
+                        <div class="usp-content">
+                            <h4>3. Individual Light in Group Passage</h4>
+                            <p>During group passages, the system projects individual light contours around each visitor, which synchronize with their personal frequency. When meeting or approaching, aura colors smoothly blend, avoiding cacophony and creating a visual dialogue.</p>
+                        </div>
+                    </div>
+
+                    <div class="usp-item" style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                        <div class="usp-icon"><i class="fa-solid fa-user-shield"></i></div>
+                        <div class="usp-content">
+                            <h4>4. Privacy (Privacy by Design)</h4>
+                            <p>All biometric metrics are processed solely in RAM in real time. Personal data, photos, or video recordings of faces are not saved or transmitted to external networks.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="innovation-visual">
+                    <div class="tech-spec-box" style="height: 100%; display: flex; flex-direction: column; justify-content: center; text-align: center;">
+                        <h3>How does the contactless sensor work?</h3>
+                        <div class="tech-step-item" style="text-align: center; display: flex; flex-direction: column; align-items: center;">
+                            <span class="step-bullet">rPPG Technology</span>
+                            <p><strong>Contactless pulse:</strong> The camera captures subtle changes in facial skin color caused by blood flow in vessels with each heartbeat. Based on this, HR and heart rate variability (HRV) are calculated, estimating stress levels.</p>
+                        </div>
+                        <div class="tech-step-item" style="text-align: center; display: flex; flex-direction: column; align-items: center;">
+                            <span class="step-bullet">CV Emotion Mesh</span>
+                            <p><strong>Neural network facial analysis:</strong> Computer vision models analyze 468 facial landmark points in real time, reading micro-tension in the forehead, eyes, and mouth muscles, determining up to 8 basic emotional states.</p>
+                        </div>
+                        <div class="tech-step-item" style="text-align: center; display: flex; flex-direction: column; align-items: center;">
+                            <span class="step-bullet">Acoustic Gateway</span>
+                            <p><strong>Super-directional sound:</strong> Sound frequencies of balance are broadcast through special acoustic lenses (parametric speakers), localizing the therapeutic effect strictly above the person passing.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="section gallery-section">
+        <div class="container">
+            <h2 class="section-title text-center">Visual Materials</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item large">
+                    <img src="images/entrance.jpg" alt="Entrance to installation">
+                    <div class="item-overlay">
+                        <h3>Entrance Portal</h3>
+                        <p>Interior solution of the entrance area with sensors.</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/variations.jpg" alt="Variations of tunnel interiors">
+                    <div class="item-overlay">
+                        <h3>Types of Spatial Geometry</h3>
+                        <p>Grid, biomorphic shapes, and polygonal sections.</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/pov_states.jpg" alt="First person view by states">
+                    <div class="item-overlay">
+                        <h3>Light Filters</h3>
+                        <p>Deep blue (stress), gold (apathy), and pure white (catharsis).</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/side_view.png" alt="Section drawing">
+                    <div class="item-overlay">
+                        <h3>Longitudinal Section</h3>
+                        <p>Structural solution and propagation of the light trail behind a person.</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/pov_inside.png" alt="Tunnel interior">
+                    <div class="item-overlay">
+                        <h3>Light Cocoon</h3>
+                        <p>Seamless coverage of high-resolution LED panels.</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/blueprint.png" alt="Top blueprint layout">
+                    <div class="item-overlay">
+                        <h3>Architectural Layout</h3>
+                        <p>Zoning from scanning to the exit light room.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team / Philosophy Section -->
+    <section id="team" class="section team-section">
+        <div class="container">
+            <h2 class="section-title text-center">Project Authors</h2>
+            <div class="grid grid-2">
+                <!-- Valery -->
+                <div class="author-card">
+                    <div class="author-header">
+                        <h3>Valery Latypov</h3>
+                        <span class="author-title">Visual Artist & Physicist (MEPhI)</span>
+                    </div>
+                    <p class="author-bio">Engineer-physicist by education (quantum radiophysics, MEPhI, 2006). Over 20 years working at the intersection of physics, visual art, and sound. TEDx speaker (2018, concept 'Alchemical Portrait'). Member of the Russian Union of Art Photographers since 2021. Official photographer for Dubai Opera (Carmina Burana, 2025). In the project, responsible for technological vision, setting requirements for technical contractors, generative visual concepts, and the artistic part.</p>
+                    <div class="author-links">
+                        <a href="http://www.valerylatypov.com" target="_blank"><i class="fa-solid fa-globe"></i> valerylatypov.com</a>
+                    </div>
+                </div>
+                <!-- Alena -->
+                <div class="author-card">
+                    <div class="author-header">
+                        <h3>Alena Levitskaya</h3>
+                        <span class="author-title">Founder of AB "STRUCTURE"</span>
+                    </div>
+                    <p class="author-bio">Member of the Union of Moscow Architects since 2009. Her bureau since 2015 designs complex residential, social, and cultural facilities. Alena specializes in "revitalizing" and reimagining dead urban spaces, holds a Ministry of Culture license for historical heritage preservation, and designed the "ArtMasters" creative residency. Responsible for structural design, zoning, and spatial adaptation.</p>
+                    <div style="margin-top: 15px;">
+                        <strong>Key Projects:</strong>
+                        <ul style="list-style: none; padding: 0; color: var(--text-secondary); margin-top: 5px;">
+                            <li>• Multilevel parking at Vnukovo Airport</li>
+                            <li>• Restoration of the Northern River Terminal</li>
+                        </ul>
+                    </div>
+                    <div class="author-links">
+                        <a href="https://thestructure.ru" target="_blank"><i class="fa-solid fa-globe"></i> thestructure.ru</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- City Scale: Neural Network of Bridges -->
+    <section id="city-network" class="section city-network-section">
+        <div class="container">
+            <h2 class="section-title text-center">Visionary Scale: Metropolis Neural Network</h2>
+            <p class="lead text-center" style="max-width: 900px; margin: 0 auto 40px auto;">Scaling concept: integration of light and acoustic gateways across Moscow. From individual bridges to a global network in Moscow-City and metro lines.</p>
+            
+            <div class="network-tabs-grid" style="grid-template-columns: 1fr 1fr; display: grid; gap: 30px;">
+                <!-- Concept 1: City Scale -->
+                <div class="network-card-main" style="grid-column: span 1;">
+                    <div class="network-image-wrapper">
+                        <img src="images/moscow_bridges.png" alt="Light neural network of Moscow bridges" class="network-img">
+                        <div class="network-glow"></div>
+                        <div class="network-badge-overlay">City Scale</div>
+                    </div>
+                    <div class="network-card-content">
+                        <h3>City Scale: Unified Pulse</h3>
+                        <p>Connecting key pedestrian and road crossings of the center into a single living contour. Light waves are broadcast along the water, reflecting the dynamics of movement and emotional background of residents.</p>
+                    </div>
+                </div>
+
+                <!-- Concept 2: National Scale -->
+                <div class="network-card-main highlight-card" style="grid-column: span 1;">
+                    <div class="network-image-wrapper interactive-map-wrapper">
+                        <img src="images/moscow_cosmic.png" alt="National Scale" class="network-img" style="opacity: 0.7;">
+                        <div class="network-badge-overlay special">National Reach</div>
+                    </div>
+                    <div class="network-card-content">
+                        <h3>National Reach</h3>
+                        <p>The project can and should be scaled nationwide. Integrating such therapeutic gateways in every major city will create a single network for supporting the psychological health of the nation.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Technical & Specifications Section -->
+    <section id="tech" class="section tech-section">
+        <div class="container">
+            <h2 class="section-title text-center">Technical Specifications (Specs)</h2>
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <div class="tech-icon"><i class="fa-solid fa-hard-drive"></i></div>
+                    <h3>Hardware</h3>
+                    <ul>
+                        <li><strong>Structure:</strong> Modular frame made of lightweight alloy (quick assembly).</li>
+                        <li><strong>Screens:</strong> Seamless flexible LED panels (1.8 - 2.5 mm pitch) on walls, ceiling, and floor.</li>
+                        <li><strong>Sensors:</strong> LiDAR for tracking, IR camera for contactless pulse, facial expression sensor.</li>
+                        <li><strong>Acoustics:</strong> Directional sound array (Audio Spotlight) for audio field isolation.</li>
+                    </ul>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon"><i class="fa-solid fa-code"></i></div>
+                    <h3>Software</h3>
+                    <ul>
+                        <li><strong>Neuroanalysis:</strong> Real-time psychoemotional index calculation.</li>
+                        <li><strong>Generative Engine:</strong> Dynamic light rendering via TouchDesigner / Unreal Engine.</li>
+                        <li><strong>Binaural Synthesis:</strong> Real-time generation of compensating audio frequencies.</li>
+                        <li><strong>Export:</strong> Automatic rendering of 15-second video report with QR code cloud upload.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 Neurotunnel "The State Tunnel" Project. Designed specifically for the national accelerator #Neurofest2026.</p>
+                <div class="footer-links">
+                    <a href="#concept">About</a>
+                    <a href="#simulator">Simulator</a>
+                    <a href="#city-network">Bridge Network</a>
+                    <a href="#team">Contacts</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- QR Code Modal (Simulated) -->
+    <div class="modal" id="qr-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3>Your QR code is ready!</h3>
+            <p>Scan the code with your smartphone to download your personal video and transition map.</p>
+            <div class="qr-placeholder">
+                <i class="fa-solid fa-qrcode"></i>
+            </div>
+            <span class="qr-id">ID: ST-2026-992</span>
+            <button class="btn btn-primary" id="btn-close-modal">Great</button>
+        </div>
+    </div>
+
+    <!-- Script -->
+    <script src="script.js"></script>
+
+    <!-- Contact FAB -->
+    <div class="contact-fab">
+        <div class="fab-content">
+            <a href="https://t.me/Alena_Levitskaya" target="_blank" class="fab-link"><i class="fa-brands fa-telegram"></i> @Alena_Levitskaya</a>
+            <a href="tel:+79031187296" class="fab-link"><i class="fa-solid fa-phone"></i> +7 903 118 7296</a>
+        </div>
+        <button class="fab-btn">Contact Authors</button>
+    </div>
+
+</body>
+</html>

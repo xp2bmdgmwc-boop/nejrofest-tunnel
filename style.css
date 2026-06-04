@@ -2291,3 +2291,34 @@ body.simulation-active .reveal-init {
     color: #0ea5e9 !important;
     background-color: rgba(14, 165, 233, 0.12) !important;
 }
+
+/* Language Switcher Styles */
+.cta-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.lang-toggle-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: var(--border-radius-sm);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    transition: all 0.3s ease;
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
+.lang-toggle-link:hover {
+    color: var(--accent) !important;
+    border-color: var(--accent) !important;
+    background-color: rgba(74, 158, 255, 0.08) !important;
+    box-shadow: 0 0 15px rgba(74, 158, 255, 0.15);
+}
+

@@ -1096,7 +1096,7 @@ body.simulation-active .reveal-init {
 
 /* Footer */
 .footer {
-    padding: 40px 0;
+    padding: 40px 0 120px 0;
     border-top: 1px solid rgba(255, 255, 255, 0.05);
     background-color: #040407;
 }
@@ -1113,23 +1113,37 @@ body.simulation-active .reveal-init {
 @media (min-width: 768px) {
     .footer-content {
         flex-direction: row;
+        flex-wrap: wrap;
         text-align: left;
+        gap: 20px 30px;
     }
 }
 
 .footer p {
     font-size: 0.85rem;
     color: var(--text-muted);
+    line-height: 1.6;
+    margin: 0;
+}
+
+@media (min-width: 768px) {
+    .footer p {
+        max-width: 55%;
+    }
 }
 
 .footer-links {
     display: flex;
-    gap: 20px;
+    gap: 24px;
+    flex-wrap: wrap;
+    align-items: center;
 }
 
 .footer-links a {
     font-size: 0.85rem;
     color: var(--text-muted);
+    white-space: nowrap;
+    transition: color 0.3s ease;
 }
 
 .footer-links a:hover {

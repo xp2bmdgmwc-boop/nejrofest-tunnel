@@ -278,20 +278,25 @@ a {
 
 .nav {
     display: none;
-    gap: 30px;
+    gap: 20px;
 }
 
 @media (min-width: 1024px) {
     .nav {
         display: flex;
+        align-items: center;
+        margin-left: 50px;
+        margin-right: auto;
     }
 }
 
 .nav a {
-    font-size: 0.95rem;
+    font-size: 0.85rem;
     font-weight: 400;
     letter-spacing: 0.05em;
     color: var(--text-secondary);
+    white-space: nowrap;
+    transition: color 0.3s ease;
 }
 
 .nav a:hover {
